@@ -17,23 +17,26 @@ public class ArticleDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    public void save (Articulo articulo){
+        String sql = "INSERT INTO articulo (nombre_articulo, ubicacion, categoria_articulo, stock_maximo, stock_minimo, stock_actual, id_bodega) Values (?, ?, ?, ?, ?, ?, ?) ";
 
-    public void save (Articulo articulo) {
-        String sql = " INSERT INTO articulo (nombre_articulo, descripcion, categoria_articulo, precio_articulo, proveedor, cantidad) Values (?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getUbicacion(), articulo.getCategoria_articulo(), articulo.getStock_maximo(), articulo.getStock_minimo(), articulo.getStock_actual(), articulo.getId_bodega());
 
-        jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getDescripcion(), articulo.getCategoria_articulo(), articulo.getPrecio_articulo(), articulo.getProveedor(), articulo.getCantidad());
-    }
+}
 
-    public void delate(int id_articulo){
+public void delate(int id_articulo){
         String sql = "DELATE FROM articulo WHERE id = " + id_articulo;
+
         jdbcTemplate.update(sql);
 
-    }
-    public void update(Articulo articulo){
-        String sql = " UPDATE articulo SET nombre_articulo = ?, descripcion = ?, categoria_articulo = ?, precio_articulo = ?, proveedor = ?, cantidad = ? WHERE id_articulo";
+}
 
-        jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getDescripcion(), articulo.getCategoria_articulo(), articulo.getPrecio_articulo(), articulo.getProveedor(), articulo.getCantidad(), articulo.getId_articulo());
-    }
+public void update (Articulo articulo) {
+    String sql = "UPDATE articulo SET  nombre_articulo = ? , ubicacion = ?, categoria_articulo = ?, stock_maximo = ?, stock_minimo = ?, stock_actual = ?, id_bodega = ?";
+    jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getUbicacion(), articulo.getCategoria_articulo(), articulo.getStock_maximo(), articulo.getStock_minimo(), articulo.getStock_actual(), articulo.getId_bodega());
+
+}
+
     public Articulo findById(int id_articulo){
         String sql = "SELECT * FROM articulo WHERE id_articulo = ?";
         return jdbcTemplate.queryForObject(sql, new ArticleRowMapper(),id_articulo);

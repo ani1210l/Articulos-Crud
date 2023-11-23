@@ -22,7 +22,7 @@ public class ArticleRowMapper implements RowMapper<Articulo> {
         articulo.setStock_actual(rs.getString("stock_actual"));
         articulo.setId_bodega(rs.getInt("id_bodega"));
 
-        
+
         return articulo;
     }
 
