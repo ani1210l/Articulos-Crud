@@ -27,10 +27,18 @@ public class Bodega {
 
     @Override
     public String toString() {
-        return "Bodega{" +
+        return "Bodega[" +
                 "codigo_bodega=" + codigo_bodega +
                 ", nombre='" + nombre + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
-                '}';
+                //", articulo=" + articulo +
+                "getCodigo_bodega=" + getCodigo_bodega() +
+                ", getNombre='" + getNombre() + '\'' +
+                ", getUbicacion='" + getUbicacion() + '\'' +
+                //", getArticulo=" + getArticulo() + '\'' +
+                "getClass()=" +getClass() + + '\'' +
+                "hashCode()=" + hashCode() + '\'' +
+                ", toString()=" + super.toString()+
+                "]";
     }
 }
