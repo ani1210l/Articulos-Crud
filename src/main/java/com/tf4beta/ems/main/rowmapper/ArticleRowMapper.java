@@ -12,16 +12,17 @@ public class ArticleRowMapper implements RowMapper<Articulo> {
     @Override
     public Articulo mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-
-
         Articulo articulo = new Articulo();
         articulo.setId_articulo(rs.getInt("id_articulo"));
         articulo.setNombre_articulo(rs.getString("nombre_articulo"));
+        articulo.setUbicacion(rs.getString("ubicacion"));
         articulo.setCategoria_articulo(rs.getString("categoria_articulo"));
-        articulo.setDescripcion(rs.getString("descripcion"));
-        articulo.setPrecio_articulo(rs.getString("precio_articulo"));
-        articulo.setProveedor(rs.getString("proveedor"));
-        articulo.setCantidad(rs.getString("cantidad"));
+        articulo.setStock_maximo(rs.getString("stock_maximo"));
+        articulo.setStock_minimo(rs.getString("stock_minimo"));
+        articulo.setStock_actual(rs.getString("stock_actual"));
+        articulo.setId_bodega(rs.getInt("id_bodega"));
+
+        
         return articulo;
     }
 
