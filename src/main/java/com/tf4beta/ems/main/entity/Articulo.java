@@ -29,10 +29,13 @@ public class Articulo {
     @Column(name = "stock_actual")
     private String stock_actual ;
 
+    @Column(name = "id_bodega")
+    private int id_bodega;
+
     public Articulo() {
     }
 
-    public Articulo(int id_articulo, String nombre_articulo, String ubicacion, String categoria_articulo, String stock_minimo, String stock_maximo, String stock_actual) {
+    public Articulo(int id_articulo, String nombre_articulo, String ubicacion, String categoria_articulo, String stock_minimo, String stock_maximo, String stock_actual, int id_bodega) {
         this.id_articulo= id_articulo;
         this.nombre_articulo = nombre_articulo;
         this.ubicacion = ubicacion;
@@ -40,6 +43,7 @@ public class Articulo {
         this.stock_minimo = stock_minimo;
         this.stock_minimo = stock_maximo;
         this.stock_actual = stock_actual;
+        this.id_bodega = id_bodega;
     }
 
     public int getId_articulo() {
@@ -98,6 +102,14 @@ public class Articulo {
         this.stock_actual = stock_actual;
     }
 
+    public int getId_bodega() {
+        return id_bodega;
+    }
+
+    public void setId_bodega(int id_bodega) {
+        this.id_bodega = id_bodega;
+    }
+
     @Override
     public String toString() {
         return "Articulo{" +
@@ -108,35 +120,17 @@ public class Articulo {
                 ", stock_minimo='" + stock_minimo + '\'' +
                 ", stock_maximo='" + stock_maximo + '\'' +
                 ", stock_actual='" + stock_actual + '\'' +
-                ",getCodigo_articulo()= " + getId_articulo() +
+                ", id_bodega=" + id_bodega +
+                ",getid_articulo()= " + getId_articulo() +
                 ",getnombre_articulo() = " + getNombre_articulo()+
                 ",getubicacion() = " + getUbicacion()+
                 ",getcategoria_articulo() = " + getCategoria_articulo()+
-                "getstockminimo() = " + getStock_minimo()+
-                "getstockMaximo() = " +
-
+                "getstock_minimo() = " + getStock_minimo()+
+                "getstock_maximo() = " + getStock_maximo()+
+                "getstock_actual() = " + getStock_actual()+
+                ", getCLass() =" + getClass() +
+                ", hashCode()=" + hashCode()+
+                ",toString=" + super.toString()+
                 '}';
-    }
-
-    ///public String toString() {
-      //  return "articulo[" +
-            ///    "id_articulo=" + id_articulo +
-               // ", nombre_articulo='" + nombre_articulo + '\'' +
-               // ", descripcion='" + descripcion + '\'' +
-             ///   ", categoria_articulo='" + categoria_articulo + '\'' +
-             ///   ", precio_articulo='" + precio_articulo + '\'' +
-              //  ", proveedor='" + proveedor + '\'' +
-             //   ", cantidad='" + cantidad + '\'' +
-             //   ",getId_articulo()= " + getId_articulo() +
-             ///   ", getNombre_articulo()= " + getNombre_articulo()+
-            ///    ", getDescripcion()= " + getDescripcion()+
-           ///*     ", getCategoria_articulo() = " +getCategoria_articulo()+
-           ////     ", getPrecio_articulo()= " +getPrecio_articulo()+
-          ////      ", getProveedor() = " + getProveedor()+
-            ////    ",getCantidad() =" + getCantidad()+
-             ////   ", getCLass() =" + getClass() +
-           ///     ", hashCode()=" + hashCode()+
-             ///   ",toString=" + super.toString()+
-                ']';
     }
 }
