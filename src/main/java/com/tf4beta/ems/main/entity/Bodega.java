@@ -12,7 +12,14 @@ public class Bodega {
     @Column (name = "codigo_bodega")
     private int codigo_bodega;
 
-    @Column()
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "ubicacion")
+    private String ubicacion;
+
+
+
 
 
 }
