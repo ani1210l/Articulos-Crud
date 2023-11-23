@@ -112,7 +112,7 @@ public class Articulo {
 
     @Override
     public String toString() {
-        return "Articulo{" +
+        return "Articulo[" +
                 "id_articulo=" + id_articulo +
                 ", nombre_articulo='" + nombre_articulo + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
@@ -131,6 +131,6 @@ public class Articulo {
                 ", getCLass() =" + getClass() +
                 ", hashCode()=" + hashCode()+
                 ",toString=" + super.toString()+
-                '}';
+                ']';
     }
 }
