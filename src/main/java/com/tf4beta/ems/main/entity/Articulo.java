@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -37,7 +38,7 @@ public class Articulo {
 
     @ManyToOne
     @JoinColumn(name = "codigo_bodega")
-    private Bodega bodega;
+    private Bodega bodegas;
 
 
     public int getId_articulo() {
@@ -96,12 +97,13 @@ public class Articulo {
         this.stock_actual = stock_actual;
     }
 
-    public Bodega getBodega() {
-        return bodega;
+
+    public Bodega getBodegas() {
+        return bodegas;
     }
 
-    public void setBodega(Bodega bodega) {
-        this.bodega = bodega;
+    public void setBodegas(Bodega bodegas) {
+        this.bodegas = bodegas;
     }
 
     @Override
@@ -114,7 +116,7 @@ public class Articulo {
                 ", stock_minimo='" + stock_minimo + '\'' +
                 ", stock_maximo='" + stock_maximo + '\'' +
                 ", stock_actual='" + stock_actual + '\'' +
-                ", bodega=" + bodega +
+                ", bodega=" + bodegas +
                 ",getid_articulo()= " + getId_articulo() +
                 ",getnombre_articulo() = " + getNombre_articulo()+
                 ",getubicacion() = " + getUbicacion()+
@@ -122,7 +124,7 @@ public class Articulo {
                 "getstock_minimo() = " + getStock_minimo()+
                 "getstock_maximo() = " + getStock_maximo()+
                 "getstock_actual() = " + getStock_actual()+
-                "getBodega()=" + getBodega()+
+                "getBodega()=" + getBodegas()+
                 ", getCLass() =" + getClass() +
                 ", hashCode()=" + hashCode()+
                 ",toString=" + super.toString()+
