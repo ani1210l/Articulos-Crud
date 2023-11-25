@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ArticleService {
-
+/*
     @Autowired
     private ArticleDao articleDao;
 
@@ -41,4 +41,6 @@ public class ArticleService {
         List <Articulo> foundArticles = articleDao.searchByName(searchName);
         return foundArticles;
     }
+    */
+
 }

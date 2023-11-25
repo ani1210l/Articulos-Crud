@@ -11,6 +11,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <title>Agregar Bodega</title>
     <style>
         * {
             margin: 0;
@@ -24,21 +25,19 @@
             overflow-x: hidden;
         }
     </style>
-    <title>Dash-board</title>
 </head>
+
 
 <body>
 
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg  "
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark "
          style="background-color: #e3f2fd;">
-
-
 
         <a class="navbar-brand" href="/"> <img
                 th:src="@{/images/pass_fail_160px.png}"
                 class="d-inline-block align-text-top" width="30" height="30"
-                alt="icon"> INICIO
+                alt="icon"> myems.io
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
@@ -57,59 +56,37 @@
         </div>
     </nav>
 </section>
+
 <br>
-<div class="container" align="center">
-    <h3>
+
+<div class="container">
+
+
+    <h3 align="center">
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Bodega Lista
+             alt="icon"> Employee Directory
     </h3>
     <hr>
-    <div class="d-flex justify-content-between">
-        <a th:href="@{/bodegas/showFormForAdd}"
-           class="btn btn-primary btn-sm mb-3"> Agregar Bodega </a> <br>
 
-        <form action="/bodegas/searchName">
-            <!-- Search form -->
-            <input class="form-control" type="text" placeholder="Search By Name.."
-                   aria-label="Search" name="searchName">
-        </form>
-    </div>
+    <p class="h4 mb-4">Agregar Bodega</p>
 
-    <table class="table  table-hover ">
-        <thead class="thead-dark">
-        <tr>
-            <th>CODIGO BODEGA</th>
-            <th>NOMBRE</th>
-            <th>UBICACION</th>
-            <th>ACCIONES</th>
+    <form action="#" th:action="@{/bodegas/save}"
+          th:object="${bodega}" method="POST">
+        <!-- Add hidden form field to handle update -->
+        <input type="hidden" th:field="*{codigo_bodega}"/> <input type="text"
+                                                                  th:field="*{nombre}" class="form-control mb-2 col-4"
+                                                                  placeholder="Nombre Bodega"> <input type="text"
+                                                                                                      th:field="*{ubicacion}"
+                                                                                                      class="form-control mb-2 col-4"
+                                                                                                      placeholder="Ubicacion">
 
-        </tr>
-        </thead>
-        <tr th:each="tempBodega, i: ${bodega}">
-            <td th:text="${tempBodega.codigo_bodega}"></td>
-            <td th:text="${tempBodega.nombre}" />
-            <td th:text="${tempBodega.ubicacion}" />
-            <td><a
-                    th:href="@{/bodegas/showBodegaDetails(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-success btn-sm"> Detales </a> <a
-                    th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-info btn-sm"> Actualizar </a> <a
-                    th:href="@{/bodegas/delete(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-danger btn-sm"
-                    onclick="if (!(confirm('Are you sure you want to delete this bodega?'))) return false">
-                Borrar </a></td>
 
-        </tr>
-        <tbody>
 
-        </tbody>
-
-    </table>
-    <a th:href="@{/bodegas/list}" class="btn btn-warning btn-sm mb-3">Cargar
+        <button type="submit" class="btn btn-success mb-2 col-2">Add</button>
+    </form>
+    <a th:href="@{/bodegas/list}" class="btn btn-warning mb-2 col-2">Back
     </a>
-    <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 </div>
 </body>
-
 </html>

@@ -9,5 +9,5 @@ import java.util.List;
 public interface BodegaRepository extends JpaRepository<Bodega, Integer> {
 
 
-    List<Bodega> findByNameBodegaAsc();
+    //List<Bodega> findByNameBodegaAsc();
 }

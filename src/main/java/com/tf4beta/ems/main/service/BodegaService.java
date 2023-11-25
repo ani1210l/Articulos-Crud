@@ -18,4 +18,26 @@ public class BodegaService {
     public List<Bodega> findAll(){
         return bodegaDao.findAllBodegas();
     }
+
+    public Bodega findById (int codigo_bodega){
+        Bodega bodega = bodegaDao.findByCodigoBodega(codigo_bodega);
+        return bodega;
+    }
+    public  void save(Bodega bodega){
+        bodegaDao.save(bodega);
+    }
+
+    public void update (Bodega bodega){
+        bodegaDao.update(bodega);
+    }
+
+    public  void deleteByCodigoBodega(int codigoBodega){
+        bodegaDao.delete(codigoBodega);
+    }
+
+    public List<Bodega> findByNameOrLocate (String search){
+        List<Bodega> foundBodegas = bodegaDao.findByNameB(search);
+        return foundBodegas;
+    }
+
 }

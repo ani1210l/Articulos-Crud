@@ -1,14 +1,6 @@
 package com.tf4beta.ems.main.entity;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table (name = "Bodega")
 public class Bodega {
@@ -24,21 +16,46 @@ public class Bodega {
     @Column(name = "ubicacion")
     private String ubicacion;
 
+    public Bodega(int codigo_bodega, String nombre, String ubicacion) {
+        super();
+        this.codigo_bodega = codigo_bodega;
+        this.nombre = nombre;
+        this.ubicacion = ubicacion;
+    }
+
+    public Bodega() {
+    }
 
     @Override
     public String toString() {
-        return "Bodega[" +
+        return "Bodega{" +
                 "codigo_bodega=" + codigo_bodega +
                 ", nombre='" + nombre + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
-                //", articulo=" + articulo +
-                "getCodigo_bodega=" + getCodigo_bodega() +
-                ", getNombre='" + getNombre() + '\'' +
-                ", getUbicacion='" + getUbicacion() + '\'' +
-                //", getArticulo=" + getArticulo() + '\'' +
-                "getClass()=" +getClass() + + '\'' +
-                "hashCode()=" + hashCode() + '\'' +
-                ", toString()=" + super.toString()+
-                "]";
+                '}';
+    }
+
+    public int getCodigo_bodega() {
+        return codigo_bodega;
+    }
+
+    public void setCodigo_bodega(int codigo_bodega) {
+        this.codigo_bodega = codigo_bodega;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
     }
 }

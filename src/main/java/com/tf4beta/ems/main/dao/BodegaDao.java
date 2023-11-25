@@ -1,7 +1,9 @@
 package com.tf4beta.ems.main.dao;
 
 import com.tf4beta.ems.main.entity.Bodega;
+
 import com.tf4beta.ems.main.rowmapper.BodegaRowMapper;
+import com.tf4beta.ems.main.rowmapper.EmployeeRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -16,8 +18,35 @@ public class BodegaDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<Bodega> findAllBodegas(){
-        String sql = "SELECT * FROM Bodega";
+    public List<Bodega> findAllBodegas() {
+        String sql = "SELECT * FROM `bodega`";
         return jdbcTemplate.query(sql, new BodegaRowMapper());
+    }
+
+    public Bodega findByCodigoBodega(int id) {
+        String sql = "SELECT * FROM bodega WHERE codigo_bodega = ? ";
+        return jdbcTemplate.queryForObject(sql, new BodegaRowMapper(), id);
+    }
+
+    public void save(Bodega bodega) {
+        String sql = "INSERT INTO bodega ( nombre, ubicacion) VALUES (?, ?)";
+        jdbcTemplate.update(sql, bodega.getNombre(), bodega.getUbicacion());
+    }
+
+    public void update(Bodega bodega) {
+        String sql = "UPDATE bodega  SET nombre= ? , ubicacion = ? WHERE codigo_bodega =? ";
+        jdbcTemplate.update(sql, bodega.getNombre(), bodega.getUbicacion(), bodega.getCodigo_bodega());
+    }
+
+    public List<Bodega> findByNameB(String findName) {
+        String sql = "SELECT * FROM bodega WHERE nombre LIKE'%" + findName + "%'  OR ubicacion LIKE'%" + findName + "%'";
+        return jdbcTemplate.query(sql, new BodegaRowMapper());
+
+    }
+
+
+    public void delete(int codigoBodega) {
+        String sql = "DELETE FROM bodega WHERE codigo_bodega = " + codigoBodega;
+        jdbcTemplate.update(sql);
     }
 }
