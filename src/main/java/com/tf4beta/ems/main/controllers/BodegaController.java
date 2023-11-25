@@ -33,7 +33,7 @@ public class BodegaController {
     }
 
     @RequestMapping("/showBodegaDetails")
-    public String viewBodega (@RequestParam("bodegaId")  int codigo_bodega, Model model){
+    public String viewBodega (@RequestParam("codigo_bodega")  int codigo_bodega, Model model){
         Bodega bodega = bodegaService.findById(codigo_bodega);
         model.addAttribute("bodega",bodega);
         return "bodegas/bodegas-view";
@@ -59,7 +59,7 @@ public class BodegaController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormForUpdate(@RequestParam("bodegaID") int codigoBodega, Model theModel) {
+    public String showFormForUpdate(@RequestParam("codigo_bodega") int codigoBodega, Model theModel) {
 
         Bodega bodega = bodegaService.findById(codigoBodega);
 
@@ -84,7 +84,7 @@ public class BodegaController {
     }
 
     @GetMapping("/delete")
-    public String deleteBodega(@RequestParam("bodegaID") int theId) {
+    public String deleteBodega(@RequestParam("codigo_bodega") int theId) {
 
         bodegaService.deleteByCodigoBodega(theId);
 
