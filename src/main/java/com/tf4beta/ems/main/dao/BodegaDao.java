@@ -29,20 +29,21 @@ public class BodegaDao {
     }
 
     public void save(Bodega bodega) {
-        String sql = "INSERT INTO bodega ( nombre, ubicacion) VALUES (?, ?)";
-        jdbcTemplate.update(sql, bodega.getNombre(), bodega.getUbicacion());
+        String sql = "INSERT INTO bodega ( codigoB,nombre, ubicacion) VALUES (?,?, ?)";
+        jdbcTemplate.update(sql, bodega.getCodigoB(),  bodega.getNombre(), bodega.getUbicacion());
     }
 
     public void update(Bodega bodega) {
-        String sql = "UPDATE bodega  SET nombre= ? , ubicacion = ? WHERE codigo_bodega =? ";
-        jdbcTemplate.update(sql, bodega.getNombre(), bodega.getUbicacion(), bodega.getCodigo_bodega());
+        String sql = "UPDATE bodega  SET codigoB = ?, nombre= ? , ubicacion = ? WHERE codigo_bodega =? ";
+        jdbcTemplate.update(sql, bodega.getCodigoB(), bodega.getNombre(), bodega.getUbicacion(), bodega.getCodigo_bodega());
     }
 
     public List<Bodega> findByNameB(String findName) {
-        String sql = "SELECT * FROM bodega WHERE nombre LIKE'%" + findName + "%'  OR ubicacion LIKE'%" + findName + "%'";
-        return jdbcTemplate.query(sql, new BodegaRowMapper());
-
+        String sql = "SELECT * FROM bodega WHERE nombre LIKE ? OR ubicacion LIKE ? OR codigoB LIKE ?";
+        String likeParameter = "%" + findName + "%";
+        return jdbcTemplate.query(sql, new Object[]{likeParameter, likeParameter, likeParameter}, new BodegaRowMapper());
     }
+
 
 
     public void delete(int codigoBodega) {

@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
     </style>
-    <title>Detalle Bodega</title>
+    <title>Detalle Articulos</title>
 </head>
 <body>
 
@@ -56,45 +56,79 @@
 </section>
 <br>
 
-<div class="container" align="left" th:if="${bodega}">
+<div class="container" align="left" th:if="${articulo}">
     <h3 align="center">
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Bodegas
+             alt="icon"> Articulos
     </h3>
     <hr>
-    <p class="h4 mb-4">Detalles Bodega</p>
+    <p class="h4 mb-4">Detalles Articulos</p>
 
 
     <table class="table  table-hover  table-striped">
         <thead class="thead-info">
-        <tr th:if="${bodega}">
-            <th>Codigo Bodega</th>
-            <td th:text="${bodega.codigo_bodega}"></td>
+        <tr th:if="${articulo}">
+            <th>ID Articulo</th>
+            <td th:text="${articulo.id_articulo}"></td>
         </tr>
         </thead>
-        <tr th:if="${bodega}">
+        <tr th:if="${articulo}">
+            <th>Codigo</th>
+            <td th:text="${articulo.codigoA}"></td>
+        </tr>
+        <tr th:if="${articulo}">
             <th>Nombre</th>
-            <td th:text="${bodega.codigoB}"></td>
+            <td th:text="${articulo.nombre_articulo}"></td>
         </tr>
-        <tr th:if="${bodega}">
-            <th>Nombre</th>
-            <td th:text="${bodega.nombre}"></td>
+        <tr th:if="${articulo}">
+            <th>Clasificacion</th>
+            <td th:text="${articulo.clasificacion}"></td>
         </tr>
-        <tr th:if="${bodega}">
-            <th>Ubicacion</th>
-            <td th:text="${bodega.ubicacion}"></td>
+        <tr th:if="${articulo}">
+            <th>Stock Actual</th>
+            <td th:text="${articulo.stock_actual}"></td>
         </tr>
+        <tr th:if="${articulo}">
+            <th>Stock Minimo</th>
+            <td th:text="${articulo.stock_minimo}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>Stock Maximo</th>
+            <td th:text="${articulo.stock_maximo}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>Costo Prom</th>
+            <td th:text="${articulo.costo_promedio}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>ID Bodega</th>
+            <td th:text="${articulo.bodegas.codigo_bodega}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>Nombre Bodega</th>
+            <td th:text="${articulo.bodegas.nombre}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>Codigo Bodega</th>
+            <td th:text="${articulo.bodegas.codigoB}"></td>
+        </tr>
+        <tr th:if="${articulo}">
+            <th>Ubicacion Bodega</th>
+            <td th:text="${articulo.bodegas.ubicacion}"></td>
+        </tr>
+    </tr>
+
         <tbody>
         </tbody>
 
     </table>
     <div align="left">
-        <a th:href="@{/bodegas/list}" class="btn btn-warning btn-sm mb-3">Atras
-        </a> <a th:href="@{/bodegas/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Agregar Bodega </a>
-        <a th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${bodega.codigo_bodega})}" class="btn btn-info btn-sm mb-3"> Actualizar </a>
-        <a th:href="@{/bodegas/delete(codigo_bodega=${bodega.codigo_bodega})}  "class="btn btn-danger  btn-sm mb-3" onclick="if (!(confirm('Are you sure you want to delete this bodega?'))) return false">
-        Eliminar </a>
+        <a th:href="@{/articulos/list}" class="btn btn-warning btn-sm mb-3">Atras
+        </a> <a th:href="@{/articulos/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Agregar Articulo </a>
+        <a th:href="@{/articulos/showFormForUpdate(codigoA=${articulo.codigoA})}" class="btn btn-info btn-sm mb-3"> Actualizar </a>
+        <a th:href="@{/articulos/delete(codigoA=${articulo.codigoA})}  "class="btn btn-danger  btn-sm mb-3" onclick="if (!(confirm('Are you sure you want to delete this bodega?'))) return false">
+            Eliminar </a>
     </div>
 
 </div>

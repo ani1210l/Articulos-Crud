@@ -9,6 +9,8 @@ public class Bodega {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "codigo_bodega")
     private int codigo_bodega;
+    @Column(name = "codigoB")
+    private String codigoB;
 
     @Column(name = "nombre")
     private String nombre;
@@ -16,12 +18,13 @@ public class Bodega {
     @Column(name = "ubicacion")
     private String ubicacion;
 
-    public Bodega(int codigo_bodega, String nombre, String ubicacion) {
-        super();
+    public Bodega(int codigo_bodega, String codigoB, String nombre, String ubicacion) {
         this.codigo_bodega = codigo_bodega;
+        this.codigoB = codigoB;
         this.nombre = nombre;
         this.ubicacion = ubicacion;
     }
+
 
     public Bodega() {
     }
@@ -30,6 +33,7 @@ public class Bodega {
     public String toString() {
         return "Bodega{" +
                 "codigo_bodega=" + codigo_bodega +
+                ", codigo='" + codigoB + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", ubicacion='" + ubicacion + '\'' +
                 '}';
@@ -57,5 +61,13 @@ public class Bodega {
 
     public void setUbicacion(String ubicacion) {
         this.ubicacion = ubicacion;
+    }
+
+    public String getCodigoB() {
+        return codigoB;
+    }
+
+    public void setCodigoB(String codigo) {
+        this.codigoB = codigo;
     }
 }

@@ -17,34 +17,65 @@ public class ArticleDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void save (Articulo articulo){
-        String sql = "INSERT INTO articulo (nombre_articulo, ubicacion, categoria_articulo, stock_maximo, stock_minimo, stock_actual, codigo_bodega) Values (?, ?, ?, ?, ?, ?, ?) ";
+    public void save(Articulo articulo) {
+        String sql = "INSERT INTO articulo (codigoa, nombre_articulo, clasificacion, stock_maximo, stock_minimo, stock_actual, costo_promedio, codigo_bodega) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getUbicacion(), articulo.getCategoria_articulo(), articulo.getStock_maximo(), articulo.getStock_minimo(), articulo.getStock_actual(), articulo.getBodegas().getCodigo_bodega());
-
+        jdbcTemplate.update(
+                sql,
+                articulo.getCodigoA(),
+                articulo.getNombre_articulo(),
+                articulo.getClasificacion(),
+                articulo.getStock_maximo(),
+                articulo.getStock_minimo(),
+                articulo.getStock_actual(),
+                articulo.getCosto_promedio(),
+                articulo.getBodegas().getCodigo_bodega()
+        );
     }
 
-public void delate(int id_articulo){
-        String sql = "DELATE FROM articulo WHERE id = " + id_articulo;
+public void delete(String codigoA){
+        String sql = "DELETE FROM articulo WHERE codigoa = " + codigoA;
 
         jdbcTemplate.update(sql);
 
 }
 
-public void update (Articulo articulo) {
-    String sql = "UPDATE articulo SET  nombre_articulo = ? , ubicacion = ?, categoria_articulo = ?, stock_maximo = ?, stock_minimo = ?, stock_actual = ?, codigo_bodega = ?";
-    jdbcTemplate.update(sql, articulo.getNombre_articulo(), articulo.getUbicacion(), articulo.getCategoria_articulo(), articulo.getStock_maximo(), articulo.getStock_minimo(), articulo.getStock_actual(), articulo.getBodegas().getCodigo_bodega());
+    public void update(Articulo articulo) {
+        String sql = "UPDATE articulo SET codigoa=?,nombre_articulo = ? , clasificacion = ?, stock_maximo = ?, stock_minimo = ?, stock_actual = ?, costo_promedio = ?, codigo_bodega = ? WHERE id_articulo = ?";
+        jdbcTemplate.update(
+                sql,
+                articulo.getCodigoA(),
+                articulo.getNombre_articulo(),
+                articulo.getClasificacion(),
+                articulo.getStock_maximo(),
+                articulo.getStock_minimo(),
+                articulo.getStock_actual(),
+                articulo.getCosto_promedio(),
+                articulo.getBodegas().getCodigo_bodega(),
+                articulo.getId_articulo()
+        );
+    }
 
-}
 
-    public Articulo findById(int id_articulo){
-        String sql = "SELECT * FROM articulo WHERE id_articulo = ?";
-        return jdbcTemplate.queryForObject(sql, new ArticleRowMapper(),id_articulo);
+    public Articulo findById(String codigoA){
+        String sql = "SELECT a.* ,b.nombre , b.codigob, FROM articulo a LEFT JOIN bodega b ON a.codigo_bodega = b.codigo_bodega WHERE codigoA = ?";
+        return jdbcTemplate.queryForObject(sql, new ArticleRowMapper(),codigoA);
+
+    }
+    public Articulo findByIdAllDetails(String codigoA){
+        String sql = "SELECT a.* ,b.nombre , b.codigob, b.ubicacion FROM articulo a LEFT JOIN bodega b ON a.codigo_bodega = b.codigo_bodega WHERE codigoA = ?";
+        return jdbcTemplate.queryForObject(sql, new ArticleRowMapper(),codigoA);
 
     }
 
     public List <Articulo> findAll(){
-        String sql = "SELECT FROM articulo";
+        String sql = "SELECT *  FROM articulo LEFT JOIN bodega  ON articulo.codigo_bodega = bodega.codigo_bodega ";
+        return jdbcTemplate.query(sql, new ArticleRowMapper());
+    }
+    public List<Articulo> findAllWithBodegaDetails() {
+        String sql = "SELECT a.*, b.codigo_bodega, b.nombre , b.codigob  FROM articulo a " +
+                "LEFT JOIN bodega b ON a.codigo_bodega = b.codigo_bodega";
+
         return jdbcTemplate.query(sql, new ArticleRowMapper());
     }
     public List<Articulo>searchByName(String searchName){

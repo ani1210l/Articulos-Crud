@@ -11,6 +11,7 @@ public class BodegaRowMapper implements RowMapper<Bodega> {
 
         Bodega bodega = new Bodega();
         bodega.setCodigo_bodega(rs.getInt("codigo_bodega"));
+        bodega.setCodigoB(rs.getString("codigoB"));
         bodega.setNombre(rs.getString("nombre"));
         bodega.setUbicacion(rs.getString("ubicacion"));
         return bodega;

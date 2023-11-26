@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @Transactional
 public class ArticleService {
-/*
+
     @Autowired
     private ArticleDao articleDao;
 
@@ -20,8 +20,17 @@ public class ArticleService {
         return articleDao.findAll();
 
     }
-    public Articulo findById (int theId){
-        Articulo articulo = articleDao.findById(theId);
+    public List <Articulo> findAllWithBodegaDetails(){
+        return articleDao.findAllWithBodegaDetails();
+
+    }
+    public Articulo findById (String codigoA){
+        Articulo articulo = articleDao.findById(codigoA);
+        return articulo;
+
+    }
+    public Articulo findByIdWithBodegaDetails (String codigoA){
+        Articulo articulo = articleDao.findByIdAllDetails(codigoA);
         return articulo;
 
     }
@@ -33,14 +42,14 @@ public class ArticleService {
         articleDao.update(theArticulo);
 
     }
-    public void delateById(int theId){
-        articleDao.delate(theId);
+    public void delateByCodigo(String codigoA){
+        articleDao.delete(codigoA);
     }
 
     public List <Articulo> searchByName(String searchName){
         List <Articulo> foundArticles = articleDao.searchByName(searchName);
         return foundArticles;
     }
-    */
+
 
 }
