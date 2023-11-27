@@ -1,5 +1,7 @@
 package com.tf4beta.ems.main.entity;
 
+import org.springframework.data.relational.core.sql.In;
+
 import javax.persistence.*;
 @Entity
 @Table (name = "Bodega")
@@ -8,7 +10,7 @@ public class Bodega {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "codigo_bodega")
-    private int codigo_bodega;
+    private Integer codigo_bodega;
     @Column(name = "codigoB")
     private String codigoB;
 
@@ -18,7 +20,7 @@ public class Bodega {
     @Column(name = "ubicacion")
     private String ubicacion;
 
-    public Bodega(int codigo_bodega, String codigoB, String nombre, String ubicacion) {
+    public Bodega(Integer codigo_bodega, String codigoB, String nombre, String ubicacion) {
         this.codigo_bodega = codigo_bodega;
         this.codigoB = codigoB;
         this.nombre = nombre;
@@ -39,7 +41,7 @@ public class Bodega {
                 '}';
     }
 
-    public int getCodigo_bodega() {
+    public Integer getCodigo_bodega() {
         return codigo_bodega;
     }
 

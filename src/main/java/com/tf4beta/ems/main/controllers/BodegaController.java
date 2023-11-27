@@ -29,6 +29,8 @@ public class BodegaController {
     public String listBodegas(Model theModel){
         List<Bodega> theBodega = bodegaService.findAll();
         theModel.addAttribute("bodega", theBodega);
+        // Imprimir la lista en la consola
+        System.out.println("Lista de Bodegas: " + theBodega);    // Imprimir la lista en la consola
         return "bodegas/list-bodegas";
     }
 

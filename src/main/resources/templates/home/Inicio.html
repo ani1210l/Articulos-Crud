@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
     <title>Navegación</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100hv;
+            overflow-x: hidden;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -38,14 +56,22 @@
 </head>
 <body>
 
-<nav>
-    <ul>
-        <li><a href="/bodegas/list">Inicio</a></li>
-        <li><a href="/bodegas/list">Bodegas</a></li>
-        <li><a href="/employees/list">Empleados</a></li>
-        <li><a href="/articulos/list">Artículos</a></li>
-    </ul>
-</nav>
+<section id="header">
+    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
+                <!-- Aquí se agregan las nuevas direcciones -->
+                <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
+                <!-- Fin de las nuevas direcciones -->
+            </ul>
+            <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
+                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout <img th:src="@{/images/sign_out_32px.png}" class="d-inline-block align-text-top" width="25" height="25" alt="icon"></a></li>
+            </ul>
+        </div>
+    </nav>
+</section>
 
 <!-- El contenido de tu página va aquí -->
 

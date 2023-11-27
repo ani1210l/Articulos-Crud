@@ -51,5 +51,11 @@ public class ArticleService {
         return foundArticles;
     }
 
+    public List<Articulo> search(Articulo articulo) {
+        return articleDao.search(articulo);
+    }
+
+
+
 
 }

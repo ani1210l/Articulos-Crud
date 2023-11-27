@@ -23,6 +23,35 @@
             min-height: 100hv;
             overflow-x: hidden;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
     </style>
     <title>Dash-board</title>
 </head>
@@ -30,29 +59,17 @@
 <body>
 
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg  "
-         style="background-color: #e3f2fd;">
+    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
 
-
-
-        <a class="navbar-brand" href="/"> <img
-                th:src="@{/images/pass_fail_160px.png}"
-                class="d-inline-block align-text-top" width="30" height="30"
-                alt="icon"> INICIO
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link"
-                                               th:href="@{/logout}">Logout <img
-                        th:src="@{/images/sign_out_32px.png}"
-                        class="d-inline-block align-text-top" width="25" height="25"
-                        alt="icon"></a></li>
+            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
+                <!-- Aquí se agregan las nuevas direcciones -->
+                <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
+                <!-- Fin de las nuevas direcciones -->
+            </ul>
+            <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
+                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout <img th:src="@{/images/sign_out_32px.png}" class="d-inline-block align-text-top" width="25" height="25" alt="icon"></a></li>
             </ul>
         </div>
     </nav>
@@ -70,8 +87,8 @@
            class="btn btn-primary btn-sm mb-3"> Agregar Bodega </a> <br>
 
         <form id="searchForm" action="/bodegas/searchName">
-            <!-- Search form -->
-            <input class="form-control" type="text" placeholder="Search By Name.." aria-label="Search" name="searchName" id="searchName">
+            <!-- Search form <input class="form-control" type="text" placeholder="Search By Name.." aria-label="Search" name="searchName" id="searchName"> -->
+
         </form>
     </div>
 
@@ -93,7 +110,7 @@
             <td th:text="${tempBodega.ubicacion}" />
             <td><a
                     th:href="@{/bodegas/showBodegaDetails(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-success btn-sm"> Detales </a> <a
+                    class="btn btn-success btn-sm"> Detalles </a> <a
                     th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${tempBodega.codigo_bodega})}"
                     class="btn btn-info btn-sm"> Actualizar </a> <a
                     th:href="@{/bodegas/delete(codigo_bodega=${tempBodega.codigo_bodega})}"

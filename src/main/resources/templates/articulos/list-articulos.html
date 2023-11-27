@@ -23,6 +23,35 @@
             min-height: 100hv;
             overflow-x: hidden;
         }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
     </style>
     <title>Articulos</title>
 </head>
@@ -30,33 +59,23 @@
 <body>
 
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg  "
-         style="background-color: #e3f2fd;">
+    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
 
-
-
-        <a class="navbar-brand" href="/"> <img
-                th:src="@{/images/pass_fail_160px.png}"
-                class="d-inline-block align-text-top" width="30" height="30"
-                alt="icon"> INICIO
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a class="nav-link"
-                                               th:href="@{/logout}">Logout <img
-                        th:src="@{/images/sign_out_32px.png}"
-                        class="d-inline-block align-text-top" width="25" height="25"
-                        alt="icon"></a></li>
+            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
+                <!-- Aquí se agregan las nuevas direcciones -->
+                <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
+                <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
+                <!-- Fin de las nuevas direcciones -->
+            </ul>
+            <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
+                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout <img th:src="@{/images/sign_out_32px.png}" class="d-inline-block align-text-top" width="25" height="25" alt="icon"></a></li>
             </ul>
         </div>
     </nav>
 </section>
+
+
 <br>
 <div class="container" align="center">
     <h3>
@@ -66,13 +85,8 @@
     </h3>
     <hr>
     <div class="d-flex justify-content-between">
-        <a th:href="@{/articulos/showFormForAdd}"
-           class="btn btn-primary btn-sm mb-3"> Agregar Articulo </a> <br>
-
-        <form id="searchForm" action="/articulos/searchName">
-            <!-- Search form -->
-            <input class="form-control" type="text" placeholder="Search By Name.." aria-label="Search" name="searchName" id="searchName">
-        </form>
+        <a th:href="@{/articulos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Agregar Articulo</a>
+        <br>
     </div>
 
     <table class="table  table-hover ">
@@ -104,7 +118,7 @@
 
             <td><a
                     th:href="@{/articulos/showArticuloDetails(codigoA=${tempArticulo.codigoA})}"
-                    class="btn btn-success btn-sm"> Detales </a> <a
+                    class="btn btn-success btn-sm"> Detalles </a> <a
                     th:href="@{/articulos/showFormForUpdate(codigoA=${tempArticulo.codigoA})}"
                     class="btn btn-info btn-sm"> Actualizar </a> <a
                     th:href="@{/articulos/delete(codigoA=${tempArticulo.codigoA})}"
@@ -121,6 +135,23 @@
     <a th:href="@{/articulos/list}" class="btn btn-warning btn-sm mb-3">Cargar
     </a>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
+    <script>
+        function searchArticulos() {
+            // Obtener el valor del cuadro de búsqueda
+            var searchName = document.getElementById("searchName").value.toLowerCase();
+
+            // Obtener todas las filas de la tabla
+            var rows = document.querySelectorAll("#articuloTableBody tr");
+
+            // Iterar sobre las filas y mostrar/ocultar según la búsqueda
+            rows.forEach(function(row) {
+                var nombreColumn = row.cells[2].textContent.toLowerCase(); // Índice 2 es la columna de nombre
+
+                // Mostrar la fila si el nombre contiene la cadena de búsqueda, de lo contrario, ocultarla
+                row.style.display = nombreColumn.includes(searchName) ? "" : "none";
+            });
+        }
+    </script>
 </div>
 </body>
 
