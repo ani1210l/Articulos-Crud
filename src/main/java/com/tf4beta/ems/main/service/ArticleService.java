@@ -18,7 +18,6 @@ public class ArticleService {
 
     public List <Articulo> findAll(){
         return articleDao.findAll();
-
     }
     public List <Articulo> findAllWithBodegaDetails(){
         return articleDao.findAllWithBodegaDetails();
