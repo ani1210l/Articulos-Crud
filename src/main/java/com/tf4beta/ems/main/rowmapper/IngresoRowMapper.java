@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class IngresoRowMapper implements RowMapper<Ingreso> {
 
     @Override
-    public Ingreso mapRow(ResultSet rs, int rowNum) throws SQlException {
+    public Ingreso mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Ingreso ingreso = new Ingreso();
         ingreso.setId_ingresocab(rs.getInt("id_ingresocab"));
