@@ -1,16 +1,11 @@
 package com.tf4beta.ems.main.entity;
 
 
-import net.bytebuddy.dynamic.loading.ClassReloadingStrategy;
-import org.springframework.data.relational.core.sql.In;
-import java.util.Date;
-
-import javax.lang.model.element.Name;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Ingresos_cab")
-public class ingresos_cab {
+public class Ingreso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +21,10 @@ public class ingresos_cab {
     @JoinColumn(name = "codigo_bodega")
     private Bodega bodega;
 
-    public ingresos_cab() {
+    public Ingreso() {
     }
 
-    public ingresos_cab(Integer id_ingresocab, String fecha, Bodega bodega) {
+    public Ingreso(Integer id_ingresocab, String fecha, Bodega bodega) {
         this.id_ingresocab = id_ingresocab;
         this.fecha = fecha;
         this.bodega = bodega;
