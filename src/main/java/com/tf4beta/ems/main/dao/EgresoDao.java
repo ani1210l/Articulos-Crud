@@ -41,13 +41,13 @@ public class EgresoDao {
         return jdbcTemplate.queryForObject(sql, new EgresoRowMapper(), id_egreso_cab);
     }
 
-    public Egreso findByIdAllDetails(String id_egreso_cab){
+    public Egreso findByIdAllDetails(Integer id_egreso_cab){
         String sql = "SELECT e.* ,b.nombre , b.codigob, b.ubicacion FROM egreso e LEFT JOIN bodega b ON a.codigo_bodega = b.codigo_bodega WHERE id_egresos_cab = ?";
         return jdbcTemplate.queryForObject(sql, new EgresoRowMapper(),id_egreso_cab);
 
     }
     public List <Egreso> findAll(){
-        String sql = "SELECT *  FROM articulo LEFT JOIN bodega  ON articulo.codigo_bodega = bodega.codigo_bodega ";
+        String sql = "SELECT *  FROM egreso LEFT JOIN bodega  ON egreso.codigo_bodega = bodega.codigo_bodega ";
         return jdbcTemplate.query(sql, new EgresoRowMapper());
     }
     public List<Egreso> findAllWithBodegaDetails() {
@@ -55,6 +55,12 @@ public class EgresoDao {
                 "LEFT JOIN bodega b ON e.codigo_bodega = b.codigo_bodega";
 
         return jdbcTemplate.query(sql, new EgresoRowMapper());
+    }
+    public void delete(Integer id_egreso_cb){
+        String sql = "DELETE FROM egreso WHERE id_egreso_cab = '" + id_egreso_cb + "'";
+
+        jdbcTemplate.update(sql);
+
     }
 
 }
