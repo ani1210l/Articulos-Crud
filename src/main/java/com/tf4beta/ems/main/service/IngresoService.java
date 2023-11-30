@@ -16,28 +16,34 @@ public class IngresoService {
     @Autowired
     private IngresoDao ingresoDao;
 
-    public List<Ingreso> findAll(){
+    public List<Ingreso> findAll() {
         return ingresoDao.findAll();
     }
-    public List<Ingreso>findAllWithBodegaDetails(){
+
+    public List<Ingreso> findAllWithBodegaDetails() {
         return ingresoDao.findAllWhithBodegaDetaills();
 
     }
-    public Ingreso findById(Integer id_ingreso_cab){
+
+    public Ingreso findById(Integer id_ingreso_cab) {
         Ingreso Ingreso = ingresoDao.findById(id_ingreso_cab);
         return Ingreso;
     }
-    public Ingreso findByIdAllDetails (Integer id_ingreso_cab){
+
+    public Ingreso findByIdAllDetails(Integer id_ingreso_cab) {
         Ingreso Ingreso = ingresoDao.findByIdAllDetails(id_ingreso_cab);
         return Ingreso;
     }
-    public void save (Ingreso ingreso){
+
+    public void save(Ingreso ingreso) {
         ingresoDao.save(ingreso);
     }
-    public void update (Ingreso ingreso){
+
+    public void update(Ingreso ingreso) {
         ingresoDao.update(ingreso);
     }
-    public void delateByCodigo(Integer id_ingreso_cab){
+
+    public void delateByCodigo(Integer id_ingreso_cab) {
         ingresoDao.delate(id_ingreso_cab);
     }
 }
