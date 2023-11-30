@@ -46,7 +46,7 @@ return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(),id_ingresocab);
 
     }
     public List<Ingreso> findAll() {
-        String sql = "SELECT * FROM ingreso LEFT JOIN bodega ON ingreso.codigo_bodega= bodega.codigoBodega";
+        String sql = "SELECT * FROM ingresos_cab LEFT JOIN bodega ON ingresos_cab.codigo_bodega= bodega.codigo_bodega";
         return jdbcTemplate.query(sql, new IngresoRowMapper());
 
     }

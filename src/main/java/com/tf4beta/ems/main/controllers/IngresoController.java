@@ -32,7 +32,7 @@ public class IngresoController {
     public String listIngresoBodega(Model theModel){
         List<Ingreso>ingresos = ingresoService.findAll();
         theModel.addAttribute("ingresos", ingresos);
-        return "ingreso/list-ingresos";
+        return "ingresos/list-ingresos";
     }
 
 
