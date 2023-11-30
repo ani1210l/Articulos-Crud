@@ -40,7 +40,7 @@ public class IngresoDao {
         String sql = "SELECT i.*, b.codigoB FROM ingreso i LEFT JOIN bodeg b ON a.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
         return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(), id_ingresocab);
     }
-    public  Ingreso findAllDetails(Integer id_ingresocab){
+    public  Ingreso findByIdAllDetails(Integer id_ingresocab){
         String sql = "SELECT i.*, b.codigoB FROM ingreso i LEFT JOIN bodeg b ON a.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
 return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(),id_ingresocab);
 
