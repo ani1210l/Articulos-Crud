@@ -14,7 +14,7 @@ import java.util.List;
 public class EgresoDetallesDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+//guardar
     public void save(EgresoDetalles egresoDetalles) {
         String sql = "INSERT INTO egreso_detalles (cantidad, costo, id_egreso_cab, codigoa) VALUES (?, ?, ?, ?)";
 
@@ -26,12 +26,12 @@ public class EgresoDetallesDao {
                 egresoDetalles.getArticulo().getCodigoA()
         );
     }
-
+//borrar por id esta de ber si se borra tambien el de la tabla egresos para que no quede vaciola info en esa tabla
     public void delete(int id_egreso_detalles) {
         String sql = "DELETE FROM egreso_detalles WHERE id_egreso_detalles = ?";
         jdbcTemplate.update(sql, id_egreso_detalles);
     }
-
+    //actualizar
     public void update(EgresoDetalles egresoDetalles) {
         String sql = "UPDATE egreso_detalles SET cantidad = ?, costo = ?, id_egreso_cab = ?, codigoa = ? WHERE id_egreso_detalles = ?";
         jdbcTemplate.update(
@@ -43,17 +43,17 @@ public class EgresoDetallesDao {
                 egresoDetalles.getId_egreso_detalles()
         );
     }
-
+    //findById para mostrar en la pantalla de detalles con todos los datos de todas las tablas
     public EgresoDetalles findById(int id_egreso_detalles) {
         String sql = "SELECT * FROM egreso_detalles WHERE id_egreso_detalles = ?";
         return jdbcTemplate.queryForObject(sql, new EgresoDetalleRowMapper(), id_egreso_detalles);
     }
-
+//meeh
     public List<EgresoDetalles> findAll() {
         String sql = "SELECT * FROM egreso_detalles";
         return jdbcTemplate.query(sql, new EgresoDetalleRowMapper());
     }
-
+//este es para el listado
     public List<EgresoDetalles> findAllWithAllDetails(){
         String sql = "SELECT `egreso_detalles`.*, `egreso`.*, `articulo`.*, `bodega`.*\n" +
                 "FROM `egreso_detalles` \n" +

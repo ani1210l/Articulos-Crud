@@ -36,12 +36,12 @@ public class IngresoDao {
     }
 
 
-    public Ingreso findById(int id_ingresocab){
-        String sql = "SELECT i.*, b.codigoB FROM ingreso i LEFT JOIN bodeg b ON a.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
-        return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(), id_ingresocab);
+    public Ingreso findById(int id_ingreso_cab){
+        String sql = "SELECT i.*, b.nombre,b.codigoB FROM ingreso i LEFT JOIN bodega b ON i.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
+        return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(), id_ingreso_cab);
     }
     public  Ingreso findByIdAllDetails(Integer id_ingresocab){
-        String sql = "SELECT i.*, b.codigoB FROM ingreso i LEFT JOIN bodeg b ON a.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
+        String sql = "SELECT i.*,b.nombre, b.codigoB, b.ubicacion FROM ingreso i LEFT JOIN bodega b ON i.codigo_bodega = b.codigo_bodega WHERE id_ingresocab = ?";
 return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(),id_ingresocab);
 
     }
@@ -56,7 +56,7 @@ return jdbcTemplate.queryForObject(sql, new IngresoRowMapper(),id_ingresocab);
         return jdbcTemplate.query(sql, new IngresoRowMapper());
     }
     public void delate(Integer id_ingresocab){
-        String sql = "DELATE FROM ingreso WHERE id_ingreso_cab = '"+ id_ingresocab + "'";
+        String sql = "DELATE FROM ingreso WHERE id_ingresos_cab = '"+ id_ingresocab + "'";
         jdbcTemplate.update(sql);
     }
 }
