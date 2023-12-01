@@ -79,11 +79,8 @@ public class ArticleController {
 
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model theModel) {
-
         Articulo articulo = new Articulo();
-
         theModel.addAttribute("articulo", articulo);
-
         return "articulos/articulos-form";
     }
 

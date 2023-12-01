@@ -42,6 +42,7 @@ public class EgresoService {
 
     }
     public void delateByCodigo(Integer id_egreso_cab){
+
         egresoDao.delete(id_egreso_cab);
     }
 

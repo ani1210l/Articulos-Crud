@@ -38,6 +38,11 @@ public class EgresoDetalleController {
         return bodegaService.findAll();
     }
 
+    @ModelAttribute("allArticulos")
+    public List<Articulo> populateArticulos() {
+        return articleService.findAll();
+    }
+
     @GetMapping("/list")
     public String listaEgresosDetalles(Model model) {
         List<EgresoDetalles> egresoDetalles = egresoDetalleService.findAll();
@@ -55,6 +60,8 @@ public class EgresoDetalleController {
     @GetMapping("/showFormForAdd")
     public String showFormForAdd(Model model) {
         EgresoDetalles egresoDetalles = new EgresoDetalles();
+        Egreso egreso = new Egreso();
+        model.addAttribute("egresos", egreso);
         model.addAttribute("egresosDetalles", egresoDetalles);
         return "egresos/egresosDetalles-form";
     }
@@ -73,7 +80,7 @@ public class EgresoDetalleController {
     }
 
     @PostMapping("/save")
-    public String saveArticulo(@ModelAttribute("egresoDetalels") EgresoDetalles egresoDetalles) {
+    public String saveEgresoDetalles(@ModelAttribute("egresoDetalels") EgresoDetalles egresoDetalles) {
 
         egresoDetalleService.save(egresoDetalles);
 
@@ -81,7 +88,7 @@ public class EgresoDetalleController {
     }
 
     @PostMapping("/update")
-    public String updateArticulo(@ModelAttribute("egresoDetalels") EgresoDetalles egresoDetalles) {
+    public String updateEgresosDetalles(@ModelAttribute("egresoDetalels") EgresoDetalles egresoDetalles) {
 
         egresoDetalleService.update(egresoDetalles);
 
@@ -90,7 +97,7 @@ public class EgresoDetalleController {
     }
 
     @GetMapping("/delete")
-    public String deleteArticulo(@RequestParam("id_egreso_detalles") Integer id_egreso_detalles) {
+    public String deleteEgresosDetalles(@RequestParam("id_egreso_detalles") Integer id_egreso_detalles) {
 
         egresoDetalleService.deleteByCodigo(id_egreso_detalles);
 
