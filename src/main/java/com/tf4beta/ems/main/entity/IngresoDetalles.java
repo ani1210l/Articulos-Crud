@@ -10,34 +10,33 @@ public class IngresoDetalles {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_ingresos_detalle")
-    private  Integer id_Ingresos_detalle;
+    @Column(name = "id_ingresos_detalle")
+    private Integer id_Ingresos_detalle;
 
     @Column(name = "cantidad_ingresada")
     private String cantidad_ingresada;
 
     @Column(name = "precio_compra")
-    private String precio_compra;
+    private double precio_compra;
 
     @ManyToOne
     @JoinColumn(name = "id_articulo")
-    private  Articulo articulo;
+    private Articulo articulo;
 
     @ManyToOne
     @JoinColumn(name = "id_ingresoss_cab")
-    private  Ingreso ingreso;
+    private Ingreso ingreso;
 
     public IngresoDetalles() {
     }
 
-    public IngresoDetalles(Integer id_Ingresos_detalle, String cantidad_ingresada, String precio_compra, Articulo articulo, Ingreso ingreso) {
+    public IngresoDetalles(Integer id_Ingresos_detalle, String cantidad_ingresada, double precio_compra, Articulo articulo, Ingreso ingreso) {
         this.id_Ingresos_detalle = id_Ingresos_detalle;
         this.cantidad_ingresada = cantidad_ingresada;
         this.precio_compra = precio_compra;
         this.articulo = articulo;
         this.ingreso = ingreso;
     }
-
 
     @Override
     public String toString() {
@@ -66,11 +65,11 @@ public class IngresoDetalles {
         this.cantidad_ingresada = cantidad_ingresada;
     }
 
-    public String getPrecio_compra() {
+    public double getPrecio_compra() {
         return precio_compra;
     }
 
-    public void setPrecio_compra(String precio_compra) {
+    public void setPrecio_compra(double precio_compra) {
         this.precio_compra = precio_compra;
     }
 
@@ -90,3 +89,4 @@ public class IngresoDetalles {
         this.ingreso = ingreso;
     }
 }
+
