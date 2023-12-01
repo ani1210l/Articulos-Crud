@@ -29,10 +29,10 @@ public class ArticleController {
         return bodegaService.findAll();
     }
 
-    @GetMapping("index")
-    public String articuloIndex() {
-        return "articulos/articulos-index.html";
-    }
+    //@GetMapping("index")
+    //public String articuloIndex() {
+    //    return "articulos/articulos-index.html";
+    //}
 
     @GetMapping("/nolist")
     public String listArticulos(Model theModel) {
