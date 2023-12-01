@@ -30,11 +30,34 @@ public class EgresoDetallesDao {
                 egresoDetalles.getArticulo().getCodigoA()
         );
     }
-//borrar por id esta de ber si se borra tambien el de la tabla egresos para que no quede vaciola info en esa tabla
-    public void delete(int id_egreso_detalles) {
-        String sql = "DELETE FROM egreso_detalles WHERE id_egreso_detalles = ?";
+
+    //NO VALE
+    public void delete(Integer id_egreso_detalles) {
+        String sql = "DELETE egreso_detalles, egreso " +
+                "FROM egreso_detalles " +
+                "JOIN egreso " +
+                "ON egreso.id_egreso_cab = egreso_detalles.id_egreso_cab " +
+                "WHERE egreso_detalles.id_egreso_detalles = ?";
         jdbcTemplate.update(sql, id_egreso_detalles);
     }
+
+    //Borrar por Id y que tambien se elimine el registro en la tabla de egreso
+    public void deleteEgresoDetallesAndEgreso(int idEgresoDetalles) {
+        // Obtén el ID de egreso_cab correspondiente a idEgresoDetalles
+        String sqlSelectEgresoCab = "SELECT id_egreso_cab FROM egreso_detalles WHERE id_egreso_detalles = ?";
+        Integer idEgresoCab = jdbcTemplate.queryForObject(sqlSelectEgresoCab, Integer.class, idEgresoDetalles);
+
+        // Borra el registro de egreso_detalles
+        String sqlDeleteEgresoDetalles = "DELETE FROM egreso_detalles WHERE id_egreso_detalles = ?";
+        jdbcTemplate.update(sqlDeleteEgresoDetalles, idEgresoDetalles);
+
+        // Borra el registro de egreso usando el ID obtenido anteriormente
+        if (idEgresoCab != null) {
+            String sqlDeleteEgreso = "DELETE FROM egreso WHERE id_egreso_cab = ?";
+            jdbcTemplate.update(sqlDeleteEgreso, idEgresoCab);
+        }
+    }
+
     //actualizar
     public void update(EgresoDetalles egresoDetalles) {
         String sql = "UPDATE egreso_detalles SET cantidad = ?, costo = ?, id_egreso_cab = ?, codigoa = ? WHERE id_egreso_detalles = ?";
@@ -75,21 +98,5 @@ public class EgresoDetallesDao {
                 "\tLEFT JOIN `articulo` ON `egreso_detalles`.`codigoa` = `articulo`.`id_articulo` \n" +
                 "\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
         return jdbcTemplate.query(sql, new EgresoDetalleRowMapper());
-    }
-    // Método para eliminar un registro en la tabla egreso_detalles y también en la tabla egreso
-    public void deleteEgresoDetallesAndEgreso(int id_egreso_detalles) {
-        String deleteEgresoSql = "DELETE FROM egreso WHERE id_egreso_cab = (SELECT id_egreso_cab FROM egreso_detalles WHERE id_egreso_detalles = ?)";
-        String deleteEgresoDetallesSql = "DELETE FROM egreso_detalles WHERE id_egreso_detalles = ?";
-
-
-        try {
-            // Eliminar el registro en la tabla egreso_detalles
-            jdbcTemplate.update(deleteEgresoDetallesSql, id_egreso_detalles);
-            // Eliminar el registro correspondiente en la tabla egreso
-            jdbcTemplate.update(deleteEgresoSql, id_egreso_detalles);
-        } catch (DataAccessException e) {
-            // Manejar excepciones de acceso a datos (por ejemplo, errores de SQL)
-            throw new RuntimeException("Error al eliminar el registro", e);
-        }
     }
 }

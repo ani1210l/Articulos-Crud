@@ -178,7 +178,7 @@
         <a th:href="@{/egresosDetalles/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Agregar Egreso </a>
         <a th:href="@{/egresosDetalles/showFormForUpdate(codigoA=${egresosDetalles.id_egreso_detalles})}"
            class="btn btn-info btn-sm mb-3"> Actualizar </a>
-        <a th:href="@{/egresosDetalles/delete(codigoA=${egresosDetalles.id_egreso_detalles})}  "
+        <a th:href="@{/egresosDetalles/delete(id_egreso_detalles=${egresosDetalles.id_egreso_detalles})}  "
            class="btn btn-danger  btn-sm mb-3"
            onclick="if (!(confirm('Are you sure you want to delete this bodega?'))) return false">
             Eliminar </a>
