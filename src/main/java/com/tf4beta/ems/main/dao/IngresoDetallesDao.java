@@ -56,6 +56,16 @@ public class IngresoDetallesDao {
         String sql = "SELECT * FROM ingresoDetalles WHERE id_ingresos_detalle = ?";
         return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
     }
+    public IngresoDetalles findByIdWithAllDetails(int id_ingdetalle){
+        String sql = "SELCT `ing_detalle`.*, `ingreso_cab`.*, `articulo`.*, `bodega`.*\\n\" +\n" +
+                "                \"FROM `ing_detalle`\n\" +\n" +
+                "                \"\tLEFT JOIN `ingreso_cab` ON `ing_detalle`.`id_ingresos_cab` = `egreso`.`id_egreso_cab`\\n\" +\n" +
+                "                \"\tLEFT JOIN `articulo` ON `ing_detalle`.`codigoa` = `articulo`.`id_articulo`\\n\" +\n" +
+                "                \"\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`\\n\" +\n" +
+                "                \"WHERE `ing_detalle`.`id_ingdetalles` = ?";
+                return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
+
+    }
 
     public List<IngresoDetalles> findAll() {
         String sql = "SELECT * FROM ingresoDetalles";

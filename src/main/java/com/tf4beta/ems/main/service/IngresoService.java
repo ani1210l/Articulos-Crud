@@ -44,6 +44,7 @@ public class IngresoService {
     }
 
     public void delateByCodigo(Integer id_ingreso_cab) {
+
         ingresoDao.delate(id_ingreso_cab);
     }
 }
