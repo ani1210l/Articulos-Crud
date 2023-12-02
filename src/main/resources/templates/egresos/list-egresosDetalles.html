@@ -87,10 +87,13 @@
              alt="icon"> Egresos Lista
     </h3>
     <hr>
-    <div class="d-flex justify-content-between">
-        <a th:href="@{/egresos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Registrar Egreso</a>
-        <br>
+    <div class="d-flex justify-content-start align-items-center mb-3">
+        <a th:href="@{/egresos/showFormForAdd}" class="btn btn-primary btn-sm mr-2">Registrar Egreso</a>
+        <a th:href="@{/egresosDetalles/exportarPDF}" class="btn btn-primary btn-sm mr-2">Exportar a PDF</a>
+        <a th:href="@{/egresosDetalles/list}" class="btn btn-primary btn-sm mr-2">Cargar</a>
     </div>
+
+
 
     <table class="table table-hover">
         <thead class="thead-dark text-center">
@@ -107,7 +110,7 @@
         </tr>
         </thead>
         <tr th:each="tempEgresosDetalles, i: ${egresosDetalles}">
-            <td th:text="${tempEgresosDetalles.id_egreso_detalles}" class="text-center"></td>
+            <td th:text="${tempEgresosDetalles.id_egreso_detalles + ' -  ' +  tempEgresosDetalles.egreso.id_egreso_cab}" class="text-center"></td>
             <td th:text="${tempEgresosDetalles.egreso.fecha}" class="text-center"></td>
             <td th:text="${tempEgresosDetalles.articulo.codigoA}" class="text-center"></td>
             <td th:text="${tempEgresosDetalles.articulo.nombre_articulo}" class="text-center"></td>
@@ -130,12 +133,14 @@
         <tbody>
         </tbody>
     </table>
-    <a th:href="@{/egresosDetalles/list}" class="btn btn-warning btn-sm mb-3">Cargar</a>
+    <!-- Botón para imprimir -->
+    <!-- Botones alineados a la derecha -->
+    <div class="d-flex justify-content-start">
+    </div>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 </div>
+
 </body>
-
-
 
 
 </html>

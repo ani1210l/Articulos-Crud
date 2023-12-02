@@ -18,12 +18,38 @@ import java.util.List;
 public class EgresoDetallesDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-//guardar
+
+    //guardar
+    /*
     public void save(EgresoDetalles egresoDetalles) {
         String sql = "INSERT INTO egreso_detalles (cantidad, costo, id_egreso_cab, id_articulo) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(
                 sql,
+                egresoDetalles.getCantidad(),
+                egresoDetalles.getCosto(),
+                egresoDetalles.getEgreso().getId_egreso_cab(),
+                egresoDetalles.getArticulo().getId_articulo()
+        );
+    }*/
+
+    //Guardar y Actualizar Stock
+    public void save(EgresoDetalles egresoDetalles) {
+        // Obtener el stock actual
+        String sqlStock = "SELECT stock_actual FROM articulo WHERE id_articulo = ?";
+        int stockActual = jdbcTemplate.queryForObject(sqlStock, Integer.class, egresoDetalles.getArticulo().getId_articulo());
+
+        // Restar la cantidad egresada del stock
+        int nuevaCantidad = stockActual - egresoDetalles.getCantidad();
+
+        // Actualizar el stock en la tabla de artículos
+        String sqlUpdateStock = "UPDATE articulo SET stock_actual = ? WHERE id_articulo = ?";
+        jdbcTemplate.update(sqlUpdateStock, nuevaCantidad, egresoDetalles.getArticulo().getId_articulo());
+
+        // Insertar en la tabla egreso_detalles
+        String sqlInsert = "INSERT INTO egreso_detalles (cantidad, costo, id_egreso_cab, id_articulo) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(
+                sqlInsert,
                 egresoDetalles.getCantidad(),
                 egresoDetalles.getCosto(),
                 egresoDetalles.getEgreso().getId_egreso_cab(),
@@ -70,11 +96,13 @@ public class EgresoDetallesDao {
                 egresoDetalles.getId_egreso_detalles()
         );
     }
+
     //findById de Egresos
     public EgresoDetalles findById(int id_egreso_detalles) {
         String sql = "SELECT * FROM egreso_detalles WHERE id_egreso_detalles = ?";
         return jdbcTemplate.queryForObject(sql, new EgresoDetalleRowMapper(), id_egreso_detalles);
     }
+
     //findById para mostrar en la pantalla de detalles con todos los datos de todas las tablas
     public EgresoDetalles findByIdWithAllDetails(int id_egreso_detalles) {
         String sql = "SELECT `egreso_detalles`.*, `egreso`.*, `articulo`.*, `bodega`.*\n" +
@@ -85,13 +113,15 @@ public class EgresoDetallesDao {
                 "WHERE `egreso_detalles`.`id_egreso_detalles` = ?";
         return jdbcTemplate.queryForObject(sql, new EgresoDetalleRowMapper(), id_egreso_detalles);
     }
-//meeh
+
+    //meeh
     public List<EgresoDetalles> findAll() {
         String sql = "SELECT * FROM egreso_detalles";
         return jdbcTemplate.query(sql, new EgresoDetalleRowMapper());
     }
-//este es para el listado
-    public List<EgresoDetalles> findAllWithAllDetails(){
+
+    //este es para el listado
+    public List<EgresoDetalles> findAllWithAllDetails() {
         String sql = "SELECT `egreso_detalles`.*, `egreso`.*, `articulo`.*, `bodega`.*\n" +
                 "FROM `egreso_detalles` \n" +
                 "\tLEFT JOIN `egreso` ON `egreso_detalles`.`id_egreso_cab` = `egreso`.`id_egreso_cab` \n" +
@@ -99,4 +129,5 @@ public class EgresoDetallesDao {
                 "\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
         return jdbcTemplate.query(sql, new EgresoDetalleRowMapper());
     }
+
 }

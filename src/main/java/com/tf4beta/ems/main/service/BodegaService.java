@@ -2,10 +2,13 @@ package com.tf4beta.ems.main.service;
 
 import com.tf4beta.ems.main.dao.BodegaDao;
 import com.tf4beta.ems.main.entity.Bodega;
+import com.tf4beta.ems.main.util.EgresoReporte;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service
@@ -14,6 +17,8 @@ public class BodegaService {
 
     @Autowired
     private BodegaDao bodegaDao;
+    @Autowired
+    private EgresoReporte egresoReporte;
 
     public List<Bodega> findAll(){
         return bodegaDao.findAllBodegas();

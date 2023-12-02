@@ -15,6 +15,7 @@ public class EgresoDetalleService {
     @Autowired
     private EgresoDetallesDao egresoDetallesDao;
 
+
     public List<EgresoDetalles> findAll(){
         return egresoDetallesDao.findAllWithAllDetails();
     }
@@ -35,6 +36,8 @@ public class EgresoDetalleService {
     public void deleteByCodigo(Integer id_egreso_detalles){
         egresoDetallesDao.deleteEgresoDetallesAndEgreso(id_egreso_detalles);
     }
+
+
 
 
 }

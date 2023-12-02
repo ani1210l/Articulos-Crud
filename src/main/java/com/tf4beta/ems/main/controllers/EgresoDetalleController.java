@@ -1,5 +1,6 @@
 package com.tf4beta.ems.main.controllers;
 
+import com.lowagie.text.DocumentException;
 import com.tf4beta.ems.main.entity.Articulo;
 import com.tf4beta.ems.main.entity.Bodega;
 import com.tf4beta.ems.main.entity.Egreso;
@@ -8,11 +9,24 @@ import com.tf4beta.ems.main.service.ArticleService;
 import com.tf4beta.ems.main.service.BodegaService;
 import com.tf4beta.ems.main.service.EgresoDetalleService;
 import com.tf4beta.ems.main.service.EgresoService;
+import com.tf4beta.ems.main.util.EgresoReporte;
+import lombok.var;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -54,6 +68,11 @@ public class EgresoDetalleController {
         model.addAttribute("egresosDetalles", egresoDetalles);
         return "egresos/list-egresosDetalles";
     }
+    @GetMapping("/json")
+    public ResponseEntity<?> listAll() {
+
+        return ResponseEntity.ok(egresoDetalleService.findAll());
+    }
 
     @RequestMapping("/showEgresoDetallesDetails")
     public String viewEgresosDetalles(@RequestParam("id_egreso_detalles") Integer id_egreso_detalles, Model model) {
@@ -70,6 +89,23 @@ public class EgresoDetalleController {
         model.addAttribute("egresosDetalles", egresoDetalles);
         return "egresos/egresosDetalles-form";
     }
+
+    /*
+@GetMapping("/showFormForAdd")
+public String showFormForAdd(@RequestParam(value = "selectedBodegaId", required = false) Integer selectedBodegaId, Model model) {
+    EgresoDetalles egresoDetalles = new EgresoDetalles();
+    Egreso egreso = new Egreso();
+
+    model.addAttribute("egresos", egreso);
+    model.addAttribute("egresosDetalles", egresoDetalles);
+
+    // Agrega la lista de todos los artículos de la bodega seleccionada al modelo
+    List<Articulo> articulosDeBodega = articleService.findByIdWithBodegaDetails(selectedBodegaId);
+    model.addAttribute("allArticulos", articulosDeBodega);
+
+    return "egresos/egresosDetalles-form";
+}*/
+
 
     @GetMapping("/showFormForUpdate")
     public String showFormForUpdate(@RequestParam("id_egreso_detalles") Integer id_egreso_detalles, Model model) {
@@ -109,6 +145,23 @@ public class EgresoDetalleController {
 
         return "redirect:/egresosDetalles/list";
 
+    }
+    @GetMapping("/exportarPDF")
+    public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Empleados_" + fechaActual + ".pdf";
+
+        response.setHeader(cabecera, valor);
+
+        List<EgresoDetalles> egresoDetalles = egresoDetalleService.findAll();
+
+        EgresoReporte exporter = new EgresoReporte(egresoDetalles);
+        exporter.exportar(response);
     }
 
 }

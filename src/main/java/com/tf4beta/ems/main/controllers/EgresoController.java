@@ -1,7 +1,4 @@
 package com.tf4beta.ems.main.controllers;
-
-import com.tf4beta.ems.main.dao.EgresoDao;
-import com.tf4beta.ems.main.entity.Articulo;
 import com.tf4beta.ems.main.entity.Bodega;
 import com.tf4beta.ems.main.entity.Egreso;
 import com.tf4beta.ems.main.entity.EgresoDetalles;
@@ -45,6 +42,12 @@ public class EgresoController {
         EgresoDetalles egresoDetalles = new EgresoDetalles();
         Egreso egreso = new Egreso();
         model.addAttribute("egresos", egreso);
+        // Agrega la lista de todas las bodegas al modelo
+        List<Bodega> allBodegas = bodegaService.findAll();
+        model.addAttribute("allBodegas", allBodegas);
+
+        // Agrega el atributo para la bodega seleccionada
+        model.addAttribute("selectedBodegaId", null);
         return "egresos/egresos-form";
     }
     @GetMapping("/showFormForUpdate")
@@ -62,9 +65,12 @@ public class EgresoController {
 
 
     @PostMapping("/save")
-    public String saveEgreso(@ModelAttribute("egresos") Egreso egreso) {
+    public String saveEgreso(@ModelAttribute("egresos") Egreso egreso , Model model) {
 
         egresoService.save(egreso);
+        // Agrega el id de la bodega seleccionada al modelo
+        model.addAttribute("selectedBodegaId", egreso.getBodega().getCodigo_bodega());
+
 
         return "redirect:/egresosDetalles/showFormForAdd";
     }

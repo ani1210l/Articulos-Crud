@@ -1,11 +1,18 @@
 package com.tf4beta.ems.main.controllers;
 import com.tf4beta.ems.main.entity.Bodega;
 import com.tf4beta.ems.main.service.BodegaService;
+import lombok.var;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Controller
@@ -92,5 +99,6 @@ public class BodegaController {
 
         return "redirect:/bodegas/list";
     }
+
 
 }

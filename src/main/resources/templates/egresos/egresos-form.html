@@ -87,13 +87,13 @@
                 <input type="date"  th:field="*{fecha}" name="joiningdate" placeholder="dd-mm-yyyy" value="" min="1997-01-01"
                        max="2030-12-31"0  >
             </div>
-            <select th:field="*{bodega.codigo_bodega}" class="form-control mb-2 col-4">
+            <select th:field="*{bodega.codigo_bodega}" id="selectedBodega" class="form-control mb-2 col-4">
                 <option value="">Seleccione Bodega</option>
                 <th:block th:each="bodega : ${allBodegas}">
-                    <option th:value="${bodega.codigo_bodega}"
-                            th:text="${bodega.codigoB + ' - ' + bodega.nombre}"></option>
+                    <option th:value="${bodega.codigo_bodega}" th:text="${bodega.codigoB + ' - ' + bodega.nombre}"></option>
                 </th:block>
             </select>
+
 
             <button type="submit" class="btn btn-success mb-2 col-2">Add</button>
         </form>
@@ -103,7 +103,6 @@
     <a th:href="@{/egresosDetalles/list}" class="btn btn-warning mb-2 col-2">Back
     </a>
 </div>
-
 
 </body>
 </html>
