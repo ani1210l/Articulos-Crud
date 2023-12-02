@@ -13,7 +13,7 @@ public class IngresoRowMapper implements RowMapper<Ingreso> {
     public Ingreso mapRow(ResultSet rs, int rowNum) throws SQLException {
 
         Ingreso ingreso = new Ingreso();
-        ingreso.setId_ingresocab(rs.getInt("id_ingresocab"));
+        ingreso.setId_ingresocab(rs.getInt("id_ingreso_cab"));
         ingreso.setFecha(rs.getString("fecha"));
 
         Bodega bodega = createBodegaFromResultSet(rs);

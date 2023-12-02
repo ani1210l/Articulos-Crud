@@ -4,12 +4,12 @@ package com.tf4beta.ems.main.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Ingresos_cab")
+@Table(name = "ingresos_cab")
 public class Ingreso {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ingresocab")
+    @Column(name = "id_ingreso_cab")
     private Integer id_ingresocab;
 
 
@@ -32,7 +32,7 @@ public class Ingreso {
 
     public String toString(){
         return "Ingreso_cab{"+
-                "id_ingresocab=" + id_ingresocab +
+                "id_ingreso_cab=" + id_ingresocab +
                 " ,fecha= '" + fecha + '\'' +
                 ",bodega=" + bodega +
                 '}';

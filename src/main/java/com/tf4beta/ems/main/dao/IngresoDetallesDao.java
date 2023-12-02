@@ -19,7 +19,7 @@ public class IngresoDetallesDao {
 
     ////Guardar
     public void save(IngresoDetalles ingresoDetalles) {
-        String sql = "INSERT INTO ingresoDetalles(id_ingresos_detalle, cantidad_ingresada, precio_compra, id_articulo, id_ingresoss_cab)VALUES(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ingreso_detalle(id_ingresos_detalle, cantidad_ingresada, precio_compra, id_articulo, id_ingresoss_cab)VALUES(?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(
                 sql,
                 ingresoDetalles.getId_Ingresos_detalle(),
@@ -32,14 +32,14 @@ public class IngresoDetallesDao {
     ////Borrar por id
 
     public void delate(int id_ingdetalle) {
-        String sql = "DELATE FROM ingresoDetalles WHERE id_ingdetalle = ?";
+        String sql = "DELATE FROM ingreso_detalle WHERE id_ingdetalle = ?";
         jdbcTemplate.update(sql, id_ingdetalle);
 
     }
 
     ////Actualizar
     public void update(IngresoDetalles ingresoDetalles) {
-        String sql = "UPDATE ingresoDetalles SET  id_ingresos_detalle = ?, cantidad_ingresada = ?, precio_compra = ?, id_articulo = ?, id_ingresoss_cab = ? WHERE id_ingdetalle = ?";
+        String sql = "UPDATE ingreso_detalle SET  id_ingresos_detalle = ?, cantidad_ingresada = ?, precio_compra = ?, id_articulo = ?, id_ingresoss_cab = ? WHERE id_ingdetalle = ?";
         jdbcTemplate.update(
                 sql,
                 ingresoDetalles.getId_Ingresos_detalle(),
@@ -53,7 +53,7 @@ public class IngresoDetallesDao {
     }
 
     public IngresoDetalles findById(int id_ingdetalle) {
-        String sql = "SELECT * FROM ingresoDetalles WHERE id_ingresos_detalle = ?";
+        String sql = "SELECT * FROM ingreso_detalle WHERE id_ingresos_detalle = ?";
         return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
     }
     public IngresoDetalles findByIdWithAllDetails(int id_ingdetalle){
@@ -68,13 +68,13 @@ public class IngresoDetallesDao {
     }
 
     public List<IngresoDetalles> findAll() {
-        String sql = "SELECT * FROM ingresoDetalles";
+        String sql = "SELECT * FROM ingreso_detalle";
         return jdbcTemplate.query(sql, new IngresoDetalleRowMapper());
     }
 
     public List<IngresoDetalles> findAllWithAllDetails() {
         String sql = "SELECT ` ingresoDetalles`.*, `ingreso`.*, `articulo`.*, `bodega`.*\n" +
-                "FROM `ingresoDetalles `\n" +
+                "FROM `ingreso_detalle `\n" +
                 "\tLEFT JOIN `ingreso` ON ` ingresoDetalles` . `id_ingresoss_cab` = `ingreso`.`id_ingresoss_cab` \n" +
                 "\tLEFT JOIN `articulo` ON  `ingresoDetalles`. `codigoa` = `articulo`.`id_articulo`\n" +
                 "\tLEFT JOIN  `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";

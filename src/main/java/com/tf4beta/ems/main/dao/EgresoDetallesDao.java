@@ -20,14 +20,14 @@ public class EgresoDetallesDao {
     private JdbcTemplate jdbcTemplate;
 //guardar
     public void save(EgresoDetalles egresoDetalles) {
-        String sql = "INSERT INTO egreso_detalles (cantidad, costo, id_egreso_cab, codigoa) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO egreso_detalles (cantidad, costo, id_egreso_cab, id_articulo) VALUES (?, ?, ?, ?)";
 
         jdbcTemplate.update(
                 sql,
                 egresoDetalles.getCantidad(),
                 egresoDetalles.getCosto(),
                 egresoDetalles.getEgreso().getId_egreso_cab(),
-                egresoDetalles.getArticulo().getCodigoA()
+                egresoDetalles.getArticulo().getId_articulo()
         );
     }
 
@@ -60,13 +60,13 @@ public class EgresoDetallesDao {
 
     //actualizar
     public void update(EgresoDetalles egresoDetalles) {
-        String sql = "UPDATE egreso_detalles SET cantidad = ?, costo = ?, id_egreso_cab = ?, codigoa = ? WHERE id_egreso_detalles = ?";
+        String sql = "UPDATE egreso_detalles SET cantidad = ?, costo = ?, id_egreso_cab = ?, id_articulo = ? WHERE id_egreso_detalles = ?";
         jdbcTemplate.update(
                 sql,
                 egresoDetalles.getCantidad(),
                 egresoDetalles.getCosto(),
                 egresoDetalles.getEgreso().getId_egreso_cab(),
-                egresoDetalles.getArticulo().getCodigoA(),
+                egresoDetalles.getArticulo().getId_articulo(),
                 egresoDetalles.getId_egreso_detalles()
         );
     }
@@ -80,7 +80,7 @@ public class EgresoDetallesDao {
         String sql = "SELECT `egreso_detalles`.*, `egreso`.*, `articulo`.*, `bodega`.*\n" +
                 "FROM `egreso_detalles`\n" +
                 "\tLEFT JOIN `egreso` ON `egreso_detalles`.`id_egreso_cab` = `egreso`.`id_egreso_cab`\n" +
-                "\tLEFT JOIN `articulo` ON `egreso_detalles`.`codigoa` = `articulo`.`id_articulo`\n" +
+                "\tLEFT JOIN `articulo` ON `egreso_detalles`.`id_articulo` = `articulo`.`id_articulo`\n" +
                 "\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`\n" +
                 "WHERE `egreso_detalles`.`id_egreso_detalles` = ?";
         return jdbcTemplate.queryForObject(sql, new EgresoDetalleRowMapper(), id_egreso_detalles);
@@ -95,7 +95,7 @@ public class EgresoDetallesDao {
         String sql = "SELECT `egreso_detalles`.*, `egreso`.*, `articulo`.*, `bodega`.*\n" +
                 "FROM `egreso_detalles` \n" +
                 "\tLEFT JOIN `egreso` ON `egreso_detalles`.`id_egreso_cab` = `egreso`.`id_egreso_cab` \n" +
-                "\tLEFT JOIN `articulo` ON `egreso_detalles`.`codigoa` = `articulo`.`id_articulo` \n" +
+                "\tLEFT JOIN `articulo` ON `egreso_detalles`.`id_articulo` = `articulo`.`id_articulo` \n" +
                 "\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
         return jdbcTemplate.query(sql, new EgresoDetalleRowMapper());
     }

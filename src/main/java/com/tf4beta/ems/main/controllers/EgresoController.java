@@ -39,12 +39,34 @@ public class EgresoController {
         theModel.addAttribute("egresos", egresos);
         return "egresos/list-egresos";
     }
+
+    @GetMapping("/showFormForAdd")
+    public String showFormForAdd(Model model) {
+        EgresoDetalles egresoDetalles = new EgresoDetalles();
+        Egreso egreso = new Egreso();
+        model.addAttribute("egresos", egreso);
+        return "egresos/egresos-form";
+    }
+    @GetMapping("/showFormForUpdate")
+    public String showFormForUpdate(@RequestParam("id_egreso_cab") Integer id_egreso_cab, Model model) {
+        Egreso egreso = egresoService.findById(id_egreso_cab);
+
+        // Obtener la lista de todas las bodegas
+        List<Bodega> allBodegas = bodegaService.findAll();
+        model.addAttribute("egresos", egreso);
+        model.addAttribute("allBodegas", allBodegas);
+
+
+        return "egresos/egresos-updateForm";
+    }
+
+
     @PostMapping("/save")
     public String saveEgreso(@ModelAttribute("egresos") Egreso egreso) {
 
         egresoService.save(egreso);
 
-        return "redirect:/egresosDetalles/list";
+        return "redirect:/egresosDetalles/showFormForAdd";
     }
 
     @PostMapping("/update")
@@ -52,7 +74,7 @@ public class EgresoController {
 
         egresoService.update(egreso);
 
-        return "";
+        return "redirect:/egresosDetalles/showFormForUpdate";
 
     }
 
@@ -61,7 +83,7 @@ public class EgresoController {
 
         egresoService.delateByCodigo(id_egreso_cab);
 
-        return "";
+        return "redirect:/egresosDetalles/list";
 
     }
 

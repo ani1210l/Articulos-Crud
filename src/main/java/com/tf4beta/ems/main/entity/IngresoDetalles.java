@@ -4,7 +4,7 @@ package com.tf4beta.ems.main.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ing_detalle")
+@Table(name = "ingreso_detalle")
 public class IngresoDetalles {
 
 

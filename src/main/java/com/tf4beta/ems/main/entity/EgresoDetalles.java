@@ -22,7 +22,7 @@ public class EgresoDetalles {
     private Egreso egreso;
 
     @ManyToOne
-    @JoinColumn(name = "codigoa")
+    @JoinColumn(name = "id_articulo")
     private Articulo articulo;
 
     public EgresoDetalles() {

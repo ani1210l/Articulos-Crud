@@ -43,6 +43,11 @@ public class EgresoDetalleController {
         return articleService.findAll();
     }
 
+    @ModelAttribute("allEgresos")
+    public List<Egreso> populateEgresos() {
+        return egresoService.findAll();
+    }
+
     @GetMapping("/list")
     public String listaEgresosDetalles(Model model) {
         List<EgresoDetalles> egresoDetalles = egresoDetalleService.findAll();
@@ -73,7 +78,8 @@ public class EgresoDetalleController {
         List<Egreso> allEgresos = egresoService.findAll();
         //lista Articulos
         List<Articulo> allArticulos = articleService.findAll();
-        model.addAttribute("egresosDetalles", egresoDetalles);
+
+        model.addAttribute("egresosDetallesU", egresoDetalles);
         model.addAttribute("allEgresos", allEgresos);
         model.addAttribute("allArticulos", allArticulos);
         return "egresos/egresosDetalles-updateForm";
@@ -88,7 +94,7 @@ public class EgresoDetalleController {
     }
 
     @PostMapping("/update")
-    public String updateEgresosDetalles(@ModelAttribute("egresoDetalels") EgresoDetalles egresoDetalles) {
+    public String updateEgresosDetalles(@ModelAttribute("egresoDetalles") EgresoDetalles egresoDetalles) {
 
         egresoDetalleService.update(egresoDetalles);
 
