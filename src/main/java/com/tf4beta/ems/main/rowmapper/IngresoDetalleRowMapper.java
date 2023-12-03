@@ -17,8 +17,8 @@ public class IngresoDetalleRowMapper implements RowMapper <IngresoDetalles> {
     public IngresoDetalles mapRow(ResultSet rs, int rowNum)throws SQLException{
 
         IngresoDetalles ingresoDetalles = new IngresoDetalles();
-        ingresoDetalles.setId_Ingresos_detalle(rs.getInt("Id_ingreso_detalle"));
-        ingresoDetalles.setCantidad_ingresada(rs.getString("Cantidad"));
+        ingresoDetalles.setId_Ingresos_detalle(rs.getInt("id_ingresos_detalle"));
+        ingresoDetalles.setCantidad_ingresada(rs.getString("cantidad_ingresada"));
         ingresoDetalles.setPrecio_compra(rs.getDouble("precio_compra"));
 
         ///Ingreso
@@ -27,13 +27,14 @@ public class IngresoDetalleRowMapper implements RowMapper <IngresoDetalles> {
 
         ///Articulo
         Articulo articulo = crateArticuloFromResultSet(rs);
+        ingresoDetalles.setArticulo(articulo);
 
         return ingresoDetalles;
     }
     public Ingreso createIngresoFromResultSet(ResultSet rs) throws SQLException {
         Ingreso ingreso = new Ingreso();
         ingreso.setId_ingresocab(rs.getInt("id_ingreso_cab"));
-        ingreso.setFecha(rs.getString("Fecha"));
+        ingreso.setFecha(rs.getString("fecha"));
         ///Bodega
         Bodega bodega = createBodegaFromResultSet(rs);
         ingreso.setBodega(bodega);
@@ -57,7 +58,7 @@ public class IngresoDetalleRowMapper implements RowMapper <IngresoDetalles> {
         articulo.setStock_actual(rs.getInt("stock_actual"));
         articulo.setStock_minimo(rs.getInt("stock_minimo"));
         articulo.setStock_maximo(rs.getInt("stock_maximo"));
-        articulo.setCosto_promedio(rs.getDouble("stock_promedio"));
+        articulo.setCosto_promedio(rs.getDouble("costo_promedio"));
 
         ////crear instancia de bodega
         Bodega bodega = createBodegaFromResultSet(rs);

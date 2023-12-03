@@ -47,11 +47,11 @@ public class IngresoDetalleController {
     public String listaIngresoDetalle(Model model) {
         List<IngresoDetalles> ingresoDetalles = ingresoDetalleService.findAll();
         model.addAttribute("ingresoDetalles", ingresoDetalles);
-        return "ingresos/list-ingresoDetalles";
+        return "ingresos/list-ingresosDetalles";
 
     }
 
-    @RequestMapping("/showIngresoDetallesDetails")
+    @RequestMapping("/showIngresoDetalles")
     public String viewIngresoDetalles(@RequestParam("id_ingresos_detalle") Integer id_ingreso_detalle, Model model) {
         IngresoDetalles ingresoDetalles = ingresoDetalleService.findById(id_ingreso_detalle);
         model.addAttribute("ingresoDetalles", ingresoDetalles);

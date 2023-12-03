@@ -57,7 +57,7 @@ public class IngresoDetallesDao {
         return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
     }
     public IngresoDetalles findByIdWithAllDetails(int id_ingdetalle){
-        String sql = "SELCT `ing_detalle`.*, `ingreso_cab`.*, `articulo`.*, `bodega`.*\\n\" +\n" +
+        String sql = "SELCT `ing_detalle`.*, `ingreso_cab`.*, `articulo`.*, `bodega`.*\n\" +\n" +
                 "                \"FROM `ing_detalle`\n\" +\n" +
                 "                \"\tLEFT JOIN `ingreso_cab` ON `ing_detalle`.`id_ingresos_cab` = `egreso`.`id_egreso_cab`\\n\" +\n" +
                 "                \"\tLEFT JOIN `articulo` ON `ing_detalle`.`codigoa` = `articulo`.`id_articulo`\\n\" +\n" +
@@ -73,11 +73,11 @@ public class IngresoDetallesDao {
     }
 
     public List<IngresoDetalles> findAllWithAllDetails() {
-        String sql = "SELECT ` ingresoDetalles`.*, `ingreso`.*, `articulo`.*, `bodega`.*\n" +
-                "FROM `ingreso_detalle `\n" +
-                "\tLEFT JOIN `ingreso` ON ` ingresoDetalles` . `id_ingresoss_cab` = `ingreso`.`id_ingresoss_cab` \n" +
-                "\tLEFT JOIN `articulo` ON  `ingresoDetalles`. `codigoa` = `articulo`.`id_articulo`\n" +
-                "\tLEFT JOIN  `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
+        String sql = "SELECT `ingreso_detalle`.*, `ingresos_cab`.*, `articulo`.*, `bodega`.*\n" +
+                "FROM `ingreso_detalle`\n" +
+                "\tLEFT JOIN `ingresos_cab` ON `ingreso_detalle`.`id_ingresoss_cab` = `ingresos_cab`.`id_ingreso_cab` \n" +
+                "\tLEFT JOIN `articulo` ON `ingreso_detalle`.`id_articulo` = `articulo`.`id_articulo`\n" +
+                "\t LEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
          return jdbcTemplate.query(sql, new IngresoDetalleRowMapper());
     }
 

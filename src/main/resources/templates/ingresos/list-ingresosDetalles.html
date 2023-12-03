@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" >xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -41,6 +40,7 @@
             padding: 0;
             margin: 0;
         }
+
         nav li {
             display: inline;
             margin-right: 20px;
@@ -51,7 +51,7 @@
             color: white;
             font-weight: bold;
         }
-        </style>
+    </style>
     <title>Ingresos</title>
 </head>
 <body>
@@ -64,7 +64,8 @@
                 <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
                 <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/egresosDetalles/list">Egresos</a></li>
-                <li class="nav-item"><a class="nav-link" href="/ingresos/list">Ingresos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/ingresoDetalles/list">Ingresos</a></li>
+
                 <!-- Fin de las nuevas direcciones -->
             </ul>
             <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
@@ -73,64 +74,68 @@
         </div>
     </nav>
 </section>
+
+
 <br>
-<div class="container" align="center">
+<div class="container-fluid" align="center">
     <h3>
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
              alt="icon"> Ingresos Lista
     </h3>
     <hr>
-    <div class="d-flex justify-content-between">
-        <a th:href="@{/articulos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Agregar Articulo</a>
-        <br>
+    <div class="d-flex justify-content-start align-items-center mb-3">
+        <a th:href="@{/ingresos/showFormForAdd}" class="btn btn-primary btn-sm mr-2">Registrar Ingreso</a>
+        <a th:href="@{/ingresoDetalles/exportarPDF}" class="btn btn-primary btn-sm mr-2">Exportar a PDF</a>
+        <a th:href="@{/ingresoDetalles/list}" class="btn btn-primary btn-sm mr-2">Cargar</a>
     </div>
-
-    <table class="table  table-hover ">
-        <thead class="thead-dark">
+    <table class="table table-hover">
+        <thead class="thead-dark text-center">
         <tr>
-            <th>ID Ingresos</th>
+            <th>ID</th>
             <th>FECHA</th>
-            <th>ID BODEGA</th>
+            <th># ARTICULO.</th>
+            <th>NOMBRE ART.</th>
+            <th>CANTIDAD INGRESADA</th>
+            <th>PRECIO COMPRA</th>
+            <th>C. BODEGA</th>
+            <th>NOM. BODEGA</th>
             <th>ACCIONES</th>
-
-
         </tr>
         </thead>
-        <tr th:each="tempIngresos, i: ${ingresos}">
-            <td th:text="${tempIngresos.id_ingresocab}"></td>
-            <td th:text="${tempIngresos.fecha}" />
-            <td th:text="${tempIngresos.bodega.codigo_bodega}" />
+        <tr th:each="tempIngresosDetalles, i: ${ingresoDetalles}">
+            <td th:text="${tempIngresosDetalles.id_Ingresos_detalle+ ' -  ' +  tempIngresosDetalles.ingreso.id_ingresocab}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.ingreso.fecha}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.articulo.codigoA}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.articulo.nombre_articulo}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.cantidad_ingresada}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.precio_compra}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.ingreso.bodega.codigo_bodega}" class="text-center"></td>
+            <td th:text="${tempIngresosDetalles.ingreso.bodega.nombre}" class="text-center"></td>
 
-            <td><a
-                    th:href="@{/articulos/showArticuloDetails(codigoA=${tempIngresos.id_ingresocab})}"
-                    class="btn btn-success btn-sm"> Detalles </a> <a
-                    th:href="@{/articulos/showFormForUpdate(codigoA=${tempIngresos.id_ingresocab})}"
-                    class="btn btn-info btn-sm"> Actualizar </a> <a
-                    th:href="@{/articulos/delete(codigoA=${tempIngresos.id_ingresocab})}"
-                    class="btn btn-danger btn-sm"
-                    onclick="if (!(confirm('Are you sure you want to delete this articulo?'))) return false">
-                Borrar </a></td>
-
+            <td class="text-center">
+                <a th:href="@{/ingresoDetalles/showIngresoDetalles(id_ingresos_detalle=${tempIngresosDetalles.id_Ingresos_detalle})}"
+                   class="btn btn-success btn-sm"> Detalles </a>
+                <a th:href="@{/ingresoDetalles/showFormForUpdate(id_Ingresos_detalles=${tempIngresosDetalles.id_Ingresos_detalle})}"
+                   class="btn btn-info btn-sm"> Actualizar </a>
+                <a th:href="@{/ingresoDetalles/delete(id_Ingreso_detalles=${tempIngresosDetalles.id_Ingresos_detalle})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if (!(confirm('Are you sure you want to delete this Egreso?'))) return false"> Borrar </a>
+            </td>
         </tr>
+
         <tbody>
-
         </tbody>
-
     </table>
-    <a th:href="@{/egresos/list}" class="btn btn-warning btn-sm mb-3">Cargar
-    </a>
+    <!-- Botón para imprimir -->
+    <!-- Botones alineados a la derecha -->
+    <div class="d-flex justify-content-start">
+    </div>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
-
 </div>
+
+
+
+
 </body>
-
-
-
-
 </html>
-
-
-
-
-
