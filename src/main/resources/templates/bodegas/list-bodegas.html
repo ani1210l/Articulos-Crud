@@ -94,14 +94,14 @@
     <h1 style="font-weight: bold; text-align: center; color: #545050;">
         <b>
             <img th:src="@{/images/profile_200px.png}" class="d-inline-block align-text-top" width="40" height="40" alt="icon">
-            Bodega Lista
+            LISTA DE BODEGAS
         </b>
     </h1>
 
     <hr>
     <div class="d-flex justify-content-between">
         <a th:href="@{/bodegas/showFormForAdd}"
-           class="btn btn-primary btn-sm mb-3"> Agregar Bodega </a> <br>
+           class="btn btn-primary btn-sm mb-3"> Agregar otra Bodega</a> <br>
 
         <form id="searchForm" action="/bodegas/searchName">
             <!-- Search form <input class="form-control" type="text" placeholder="Search By Name.." aria-label="Search" name="searchName" id="searchName"> -->
@@ -127,13 +127,13 @@
             <td th:text="${tempBodega.ubicacion}"/>
             <td><a
                     th:href="@{/bodegas/showBodegaDetails(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-success btn-sm"> Detalles </a> <a
+                    class="btn btn-success btn-sm"> DETALLES </a> <a
                     th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${tempBodega.codigo_bodega})}"
-                    class="btn btn-info btn-sm"> Actualizar </a> <a
+                    class="btn btn-info btn-sm"> ACTUALIZACIONES </a> <a
                     th:href="@{/bodegas/delete(codigo_bodega=${tempBodega.codigo_bodega})}"
                     class="btn btn-danger btn-sm"
-                    onclick="if (!(confirm('Usted desea borrar Bodegas?'))) return false">
-                Borrar </a></td>
+                    onclick="if (!(confirm('¿Está seguro de eliminar la sección de BODEGAS?'))) return false">
+                ELIMINAR</a></td>
 
         </tr>
         <tbody>
@@ -141,7 +141,7 @@
         </tbody>
 
     </table>
-    <a th:href="@{/bodegas/list}" class="btn btn-warning btn-sm mb-3">Cargar
+    <a th:href="@{/bodegas/list}" class="btn btn-warning btn-sm mb-3">CARGAR
     </a>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 </div>
