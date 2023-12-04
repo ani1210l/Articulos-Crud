@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -12,17 +12,29 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <style>
+        .thead-darkGray {
+            background-color: #4b4c4f; /* Puedes ajustar el color según tus preferencias */
+            color: white;
+        }
+
+        .body-gradient {
+            background: linear-gradient(to bottom, #ffffff, darkcyan 1200px)
+
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body, html {
             width: 100%;
+            height: 100%;
             min-height: 100%;
             overflow-x: hidden;
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -30,7 +42,7 @@
         }
 
         nav {
-            background-color: #333;
+            background-color: darkcyan;
             color: white;
             padding: 10px;
             text-align: center;
@@ -56,34 +68,36 @@
     <title>Dash-board</title>
 </head>
 
-<body>
+<body class="body-gradient">
 
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar navbar-expand-lg ">
+        <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
+            <!-- Aquí se agregan las nuevas direcciones -->
+            <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
+            <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/egresosDetalles/list">Egresos</a></li>
+            <li class="nav-item"><a class="nav-link" href="/ingresoDetalles/list">Ingresos</a></li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
-                <!-- Aquí se agregan las nuevas direcciones -->
-                <li class="nav-item"><a class="nav-link" href="/bodegas/list">Bodegas</a></li>
-                <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
-                <li class="nav-item"><a class="nav-link" href="/egresosDetalles/list">Egresos</a></li>
-                <li class="nav-item"><a class="nav-link" href="/ingresoDetalles/list">Ingresos</a></li>
-
-                <!-- Fin de las nuevas direcciones -->
-            </ul>
-            <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
-                <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout <img th:src="@{/images/sign_out_32px.png}" class="d-inline-block align-text-top" width="25" height="25" alt="icon"></a></li>
-            </ul>
+            <!-- Fin de las nuevas direcciones -->
+        </ul>
+        <ul class="navbar-nav"> <!-- Esta lista estará a la derecha -->
+            <li class="nav-item active"><a class="nav-link" th:href="@{/logout}">Logout <img
+                    th:src="@{/images/sign_out_32px.png}" class="d-inline-block align-text-top" width="25" height="25"
+                    alt="icon"></a></li>
+        </ul>
         </div>
     </nav>
 </section>
 <br>
 <div class="container" align="center">
-    <h3>
-        <img th:src="@{/images/profile_200px.png}"
-             class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Bodega Lista
-    </h3>
+    <h1 style="font-weight: bold; text-align: center; color: black;">
+        <b>
+            <img th:src="@{/images/profile_200px.png}" class="d-inline-block align-text-top" width="40" height="40" alt="icon">
+            Bodega Lista
+        </b>
+    </h1>
+
     <hr>
     <div class="d-flex justify-content-between">
         <a th:href="@{/bodegas/showFormForAdd}"
@@ -96,7 +110,7 @@
     </div>
 
     <table class="table  table-hover ">
-        <thead class="thead-dark">
+        <thead class="thead-darkGray">
         <tr>
             <th>ID</th>
             <th>CODIGO B.</th>
@@ -108,9 +122,9 @@
         </thead>
         <tr th:each="tempBodega, i: ${bodega}">
             <td th:text="${tempBodega.codigo_bodega}"></td>
-            <td th:text="${tempBodega.codigoB}" />
-            <td th:text="${tempBodega.nombre}" />
-            <td th:text="${tempBodega.ubicacion}" />
+            <td th:text="${tempBodega.codigoB}"/>
+            <td th:text="${tempBodega.nombre}"/>
+            <td th:text="${tempBodega.ubicacion}"/>
             <td><a
                     th:href="@{/bodegas/showBodegaDetails(codigo_bodega=${tempBodega.codigo_bodega})}"
                     class="btn btn-success btn-sm"> Detalles </a> <a
@@ -132,8 +146,6 @@
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 </div>
 </body>
-
-
 
 
 </html>
