@@ -1,9 +1,9 @@
 package com.tf4beta.ems.main.controllers;
 
-import com.tf4beta.ems.main.entity.Articulo;
-import com.tf4beta.ems.main.entity.Bodega;
-import com.tf4beta.ems.main.entity.Ingreso;
-import com.tf4beta.ems.main.entity.IngresoDetalles;
+import com.lowagie.text.DocumentException;
+import com.tf4beta.ems.main.entity.*;
+import com.tf4beta.ems.main.reportes.EgresoReporte;
+import com.tf4beta.ems.main.reportes.IngresoReporte;
 import com.tf4beta.ems.main.service.ArticleService;
 import com.tf4beta.ems.main.service.BodegaService;
 import com.tf4beta.ems.main.service.IngresoDetalleService;
@@ -13,6 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -42,6 +47,10 @@ public class IngresoDetalleController {
     public List<Articulo> populateArticulos() {
         return articleService.findAll();
     }
+    @ModelAttribute("allIngresos")
+    public List<Ingreso>populateIngreso(){
+        return ingresoService.findAll();}
+
 
     @GetMapping("/list")
     public String listaIngresoDetalle(Model model) {
@@ -69,17 +78,17 @@ public class IngresoDetalleController {
     }
 
     @GetMapping("/showFormForUpdate")
-    public String showFormFormForUpdate(@RequestParam("id_ingreso_detalle") Integer id_ingreso_detalle, Model model) {
-        IngresoDetalles ingresoDetalles = ingresoDetalleService.findById(id_ingreso_detalle);
+    public String showFormFormForUpdate(@RequestParam("id_ingresos_detalle") Integer id_ingresos_detalle, Model model) {
+        IngresoDetalles ingresoDetalles = ingresoDetalleService.findById(id_ingresos_detalle);
 
         //lista ingresos
         List<Ingreso> allIngresos = ingresoService.findAll();
         //lista articulos
         List<Articulo> allArticulos = articleService.findAll();
-        model.addAttribute("ingresoDetalles", ingresoDetalles);
+        model.addAttribute("ingresoDetallesu", ingresoDetalles);
         model.addAttribute("allIngresos", allIngresos);
         model.addAttribute("allArticulos", allArticulos);
-        return "ingresos/ingresosDetalle-updateForm";
+        return "ingresos/ingresosDetalles-updateForm";
 
     }
 
@@ -98,11 +107,28 @@ public class IngresoDetalleController {
 
     }
 
-    @GetMapping("/delate")
-    public String delateIngresoDetalle(@RequestParam("id_ingreso_detalles") Integer id_ingreso_detalles) {
+    @GetMapping("/delete")
+    public String deleteIngresoDetalle(@RequestParam("id_ingresos_detalle") Integer id_ingreso_detalles) {
 
         ingresoDetalleService.deleteBycodigo(id_ingreso_detalles);
-        return "redirect:/ingresosDetalles/list";
+        return "redirect:/ingresoDetalles/list";
+    }
+    @GetMapping("/exportarPDF")
+    public void exportarListadoDeEmpleadosEnPDF(HttpServletResponse response) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String fechaActual = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=INGRESOS_" + fechaActual + ".pdf";
+
+        response.setHeader(cabecera, valor);
+
+        List<IngresoDetalles> ingresoDetalles = ingresoDetalleService.findAll();
+
+        IngresoReporte exporter = new IngresoReporte(ingresoDetalles);
+        exporter.exportar(response);
     }
 }
 

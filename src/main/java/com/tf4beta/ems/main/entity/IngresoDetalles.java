@@ -14,7 +14,7 @@ public class IngresoDetalles {
     private Integer id_Ingresos_detalle;
 
     @Column(name = "cantidad_ingresada")
-    private String cantidad_ingresada;
+    private Integer cantidad_ingresada;
 
     @Column(name = "precio_compra")
     private double precio_compra;
@@ -30,7 +30,7 @@ public class IngresoDetalles {
     public IngresoDetalles() {
     }
 
-    public IngresoDetalles(Integer id_Ingresos_detalle, String cantidad_ingresada, double precio_compra, Articulo articulo, Ingreso ingreso) {
+    public IngresoDetalles(Integer id_Ingresos_detalle, Integer cantidad_ingresada, double precio_compra, Articulo articulo, Ingreso ingreso) {
         this.id_Ingresos_detalle = id_Ingresos_detalle;
         this.cantidad_ingresada = cantidad_ingresada;
         this.precio_compra = precio_compra;
@@ -57,11 +57,11 @@ public class IngresoDetalles {
         this.id_Ingresos_detalle = id_Ingresos_detalle;
     }
 
-    public String getCantidad_ingresada() {
+    public Integer getCantidad_ingresada() {
         return cantidad_ingresada;
     }
 
-    public void setCantidad_ingresada(String cantidad_ingresada) {
+    public void setCantidad_ingresada(Integer cantidad_ingresada) {
         this.cantidad_ingresada = cantidad_ingresada;
     }
 

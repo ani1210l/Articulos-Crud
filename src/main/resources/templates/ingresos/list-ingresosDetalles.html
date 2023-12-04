@@ -116,11 +116,11 @@
             <td class="text-center">
                 <a th:href="@{/ingresoDetalles/showIngresoDetalles(id_ingresos_detalle=${tempIngresosDetalles.id_Ingresos_detalle})}"
                    class="btn btn-success btn-sm"> Detalles </a>
-                <a th:href="@{/ingresoDetalles/showFormForUpdate(id_Ingresos_detalles=${tempIngresosDetalles.id_Ingresos_detalle})}"
+                <a th:href="@{/ingresoDetalles/showFormForUpdate(id_ingresos_detalle=${tempIngresosDetalles.id_Ingresos_detalle})}"
                    class="btn btn-info btn-sm"> Actualizar </a>
-                <a th:href="@{/ingresoDetalles/delete(id_Ingreso_detalles=${tempIngresosDetalles.id_Ingresos_detalle})}"
+                <a th:href="@{/ingresoDetalles/delete(id_ingresos_detalle=${tempIngresosDetalles.id_Ingresos_detalle})}"
                    class="btn btn-danger btn-sm"
-                   onclick="if (!(confirm('Are you sure you want to delete this Egreso?'))) return false"> Borrar </a>
+                   onclick="if (!(confirm('Usted desea borrar Ingreso?'))) return false"> Borrar </a>
             </td>
         </tr>
 

@@ -69,7 +69,8 @@
         <a th:href="@{/bodegas/list}" class="btn btn-warning btn-sm mb-3">Atras
         </a> <a th:href="@{/bodegas/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Agregar Bodega </a>
         <a th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${bodega.codigo_bodega})}" class="btn btn-info btn-sm mb-3"> Actualizar </a>
-        <a th:href="@{/bodegas/delete(codigo_bodega=${bodega.codigo_bodega})}  "class="btn btn-danger  btn-sm mb-3" onclick="if (!(confirm('Are you sure you want to delete this bodega?'))) return false">
+        <a th:href="@{/bodegas/delete(codigo_bodega=${bodega.codigo_bodega})}  "class="btn btn-danger  btn-sm mb-3"
+           onclick="if (!(confirm('Estas seguro que deseas borrar BODEGAS?'))) return false">
         Eliminar </a>
     </div>
 

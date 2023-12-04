@@ -19,23 +19,39 @@ public class IngresoDetallesDao {
 
     ////Guardar
     public void save(IngresoDetalles ingresoDetalles) {
-        String sql = "INSERT INTO ingreso_detalle(id_ingresos_detalle, cantidad_ingresada, precio_compra, id_articulo, id_ingresoss_cab)VALUES(?, ?, ?, ?, ?, ?)";
-        jdbcTemplate.update(
-                sql,
-                ingresoDetalles.getId_Ingresos_detalle(),
-                ingresoDetalles.getCantidad_ingresada(),
-                ingresoDetalles.getPrecio_compra(),
-                ingresoDetalles.getArticulo().getCodigoA(),
-                ingresoDetalles.getIngreso().getId_ingresocab()
-        );
+        String sqlStock = "SELECT stock_actual FROM articulo WHERE id_articulo = ?";
+        int stockActual = jdbcTemplate.queryForObject(sqlStock, Integer.class, ingresoDetalles.getArticulo().getId_articulo());
+int nuevacantidad = stockActual + ingresoDetalles.getCantidad_ingresada();
+
+String sqlUpdateStock ="UPDATE articulo SET stock_actual = ? WHERE id_articulo = ?";
+jdbcTemplate.update(sqlUpdateStock, nuevacantidad, ingresoDetalles.getArticulo().getId_articulo());
+
+String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_compra,id_ingresoss_cab,id_articulo)VALUES (?,?,?,?)";
+    jdbcTemplate.update(
+            sqlInsertar,
+            ingresoDetalles.getCantidad_ingresada(),
+            ingresoDetalles.getPrecio_compra(),
+            ingresoDetalles.getIngreso().getId_ingresocab(),
+            ingresoDetalles.getArticulo().getId_articulo()
+    );
+
     }
     ////Borrar por id
 
-    public void delate(int id_ingdetalle) {
-        String sql = "DELATE FROM ingreso_detalle WHERE id_ingdetalle = ?";
-        jdbcTemplate.update(sql, id_ingdetalle);
+    public void deleteIngresoDetallesAndIngreso(int id_ingreso_detalles) {
+        String sqlSelectIngresoCab = "SELECT id_ingresoss_cab FROM ingreso_detalle WHERE id_ingresos_detalle = ?";
+        Integer idIngresosCab = jdbcTemplate.queryForObject(sqlSelectIngresoCab, Integer.class, id_ingreso_detalles);
 
+        String sqlDeleteIngresoDetalles = "DELETE FROM ingreso_detalle WHERE id_ingresos_detalle =?";
+        jdbcTemplate.update(sqlDeleteIngresoDetalles, id_ingreso_detalles);
+
+        if (idIngresosCab != null) {
+            String sqlDeleteIngreso = "DELETE FROM ingresos_cab WHERE id_ingreso_cab = ?";
+            jdbcTemplate.update(sqlDeleteIngreso, idIngresosCab);
+        }
     }
+
+
 
     ////Actualizar
     public void update(IngresoDetalles ingresoDetalles) {
@@ -52,19 +68,18 @@ public class IngresoDetallesDao {
 
     }
 
-    public IngresoDetalles findById(int id_ingdetalle) {
+    public IngresoDetalles findById(int id_ingresos_detalle) {
         String sql = "SELECT * FROM ingreso_detalle WHERE id_ingresos_detalle = ?";
-        return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
+        return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingresos_detalle);
     }
-    public IngresoDetalles findByIdWithAllDetails(int id_ingdetalle){
-        String sql = "SELCT `ing_detalle`.*, `ingreso_cab`.*, `articulo`.*, `bodega`.*\n\" +\n" +
-                "                \"FROM `ing_detalle`\n\" +\n" +
-                "                \"\tLEFT JOIN `ingreso_cab` ON `ing_detalle`.`id_ingresos_cab` = `egreso`.`id_egreso_cab`\\n\" +\n" +
-                "                \"\tLEFT JOIN `articulo` ON `ing_detalle`.`codigoa` = `articulo`.`id_articulo`\\n\" +\n" +
-                "                \"\tLEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`\\n\" +\n" +
-                "                \"WHERE `ing_detalle`.`id_ingdetalles` = ?";
-                return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingdetalle);
-
+    public IngresoDetalles findByIdWithAllDetails(int id_ingresos_detalle){
+        String sql ="SELECT `ingreso_detalle`.*, `ingresos_cab`.*, `articulo`.*, `bodega`.* " +
+                "FROM `ingreso_detalle` " +
+                "LEFT JOIN `ingresos_cab` ON `ingreso_detalle`.`id_ingresoss_cab` = `ingresos_cab`.`id_ingreso_cab` " +
+                "LEFT JOIN `articulo` ON `ingreso_detalle`.`id_articulo` = `articulo`.`id_articulo`" +
+                " LEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega` " +
+                "WHERE `ingreso_detalle`.`id_ingresos_detalle`=?";
+        return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingresos_detalle);
     }
 
     public List<IngresoDetalles> findAll() {

@@ -9,20 +9,14 @@ import com.tf4beta.ems.main.service.ArticleService;
 import com.tf4beta.ems.main.service.BodegaService;
 import com.tf4beta.ems.main.service.EgresoDetalleService;
 import com.tf4beta.ems.main.service.EgresoService;
-import com.tf4beta.ems.main.util.EgresoReporte;
-import lombok.var;
-import net.sf.jasperreports.engine.JRException;
+import com.tf4beta.ems.main.reportes.EgresoReporte;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ContentDisposition;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -154,7 +148,7 @@ public String showFormForAdd(@RequestParam(value = "selectedBodegaId", required 
         String fechaActual = dateFormatter.format(new Date());
 
         String cabecera = "Content-Disposition";
-        String valor = "attachment; filename=Empleados_" + fechaActual + ".pdf";
+        String valor = "attachment; filename=EGRESOS_" + fechaActual + ".pdf";
 
         response.setHeader(cabecera, valor);
 

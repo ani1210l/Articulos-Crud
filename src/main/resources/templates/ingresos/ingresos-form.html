@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
 
@@ -79,7 +79,7 @@
 
 
     <div class="container">
-        <form action="#" th:action="@{/ingreso/save}"
+        <form action="#" th:action="@{/ingresos/save}"
               th:object="${ingresos}" method="POST">
             <!-- Add hidden form field to handle update -->
             <div class="form-group">
@@ -98,7 +98,7 @@
     </div>
 
 
-    <a th:href="@{/ingresosDetalles/list}" class="btn btn-warning mb-2 col-2">Back
+    <a th:href="@{/ingresoDetalles/list}" class="btn btn-warning mb-2 col-2">Back
     </a>
 </div>
 </body>

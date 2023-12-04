@@ -31,7 +31,7 @@ public class IngresoDetalleService {
         ingresoDetallesDao.update(ingresoDetalles);
     }
     public void deleteBycodigo(Integer id_ing_detalle){
-        ingresoDetallesDao.delate(id_ing_detalle);
+        ingresoDetallesDao.deleteIngresoDetallesAndIngreso (id_ing_detalle);
     }
 }
 

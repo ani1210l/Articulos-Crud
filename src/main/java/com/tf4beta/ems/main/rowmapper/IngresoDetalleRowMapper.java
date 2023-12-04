@@ -18,7 +18,7 @@ public class IngresoDetalleRowMapper implements RowMapper <IngresoDetalles> {
 
         IngresoDetalles ingresoDetalles = new IngresoDetalles();
         ingresoDetalles.setId_Ingresos_detalle(rs.getInt("id_ingresos_detalle"));
-        ingresoDetalles.setCantidad_ingresada(rs.getString("cantidad_ingresada"));
+        ingresoDetalles.setCantidad_ingresada(rs.getInt("cantidad_ingresada"));
         ingresoDetalles.setPrecio_compra(rs.getDouble("precio_compra"));
 
         ///Ingreso

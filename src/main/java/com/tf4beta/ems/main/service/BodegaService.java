@@ -2,13 +2,11 @@ package com.tf4beta.ems.main.service;
 
 import com.tf4beta.ems.main.dao.BodegaDao;
 import com.tf4beta.ems.main.entity.Bodega;
-import com.tf4beta.ems.main.util.EgresoReporte;
-import net.sf.jasperreports.engine.JRException;
+import com.tf4beta.ems.main.reportes.EgresoReporte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service
