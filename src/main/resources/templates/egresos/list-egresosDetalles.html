@@ -53,7 +53,7 @@
             font-weight: bold;
         }
     </style>
-    <title>Egresos</title>
+    <title>EGRESO</title>
 </head>
 
 <body>
@@ -84,13 +84,13 @@
     <h3>
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Egresos Lista
+             alt="icon"> LISTADO DE ENGRESOS
     </h3>
     <hr>
     <div class="d-flex justify-content-start align-items-center mb-3">
-        <a th:href="@{/egresos/showFormForAdd}" class="btn btn-primary btn-sm mr-2">Registrar Egreso</a>
-        <a th:href="@{/egresosDetalles/exportarPDF}" class="btn btn-primary btn-sm mr-2">Exportar a PDF</a>
-        <a th:href="@{/egresosDetalles/list}" class="btn btn-primary btn-sm mr-2">Cargar</a>
+        <a th:href="@{/egresos/showFormForAdd}" class="btn btn-primary btn-sm mr-2">REGISTRO DE EGRESO</a>
+        <a th:href="@{/egresosDetalles/exportarPDF}" class="btn btn-primary btn-sm mr-2">EXPORTAR EN PDF</a>
+        <a th:href="@{/egresosDetalles/list}" class="btn btn-primary btn-sm mr-2">CARGAR</a>
     </div>
 
 
@@ -121,12 +121,12 @@
 
             <td class="text-center">
                 <a th:href="@{/egresosDetalles/showEgresoDetallesDetails(id_egreso_detalles=${tempEgresosDetalles.id_egreso_detalles})}"
-                   class="btn btn-success btn-sm"> Detalles </a>
+                   class="btn btn-success btn-sm"> DETALLES </a>
                 <a th:href="@{/egresosDetalles/showFormForUpdate(id_egreso_detalles=${tempEgresosDetalles.id_egreso_detalles})}"
-                   class="btn btn-info btn-sm"> Actualizar </a>
+                   class="btn btn-info btn-sm"> ACTUALIZACIONES </a>
                 <a th:href="@{/egresosDetalles/delete(id_egreso_detalles=${tempEgresosDetalles.id_egreso_detalles})}"
                    class="btn btn-danger btn-sm"
-                   onclick="if (!(confirm('Usted desea borrar Egreso?'))) return false"> Borrar </a>
+                   onclick="if (!(confirm('¿Está seguro de eliminar la sección de EGRESOS?'))) return false"> ELIMINAR</a>
             </td>
         </tr>
 

@@ -11,7 +11,7 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
-    <title>Edit Articulo</title>
+    <title>EDITAR EL ARTICULO</title>
     <style>
         * {
             margin: 0;
@@ -39,13 +39,13 @@
     <h3 align="center">
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Articulos
+             alt="icon"> ARTICULOS
     </h3>
-    <h4  align="center" ><a th:href="@{/articulos/list}" class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">Atras</a> </h4>
+    <h4  align="center" ><a th:href="@{/articulos/list}" class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">ATRAS</a> </h4>
 
     <hr>
 
-    <p class="h4 mb-4">Actualizar Articulo</p>
+    <p class="h4 mb-4">ACTUALIZACION DE LOS ARTICULOS</p>
 
     <form action="#" th:action="@{/articulos/update}"
           th:object="${articulo}" method="POST">
@@ -66,9 +66,9 @@
         </div>
 
 
-        <button type="submit" class="btn btn-success mb-2 col-2">Guardar</button>
+        <button type="submit" class="btn btn-success mb-2 col-2">GUARDAR</button>
     </form>
-    <a th:href="@{/articulos/list}" class="btn btn-warning mb-2 col-2">Atras
+    <a th:href="@{/articulos/list}" class="btn btn-warning mb-2 col-2">ATRAS
     </a>
 </div>
 </body>
