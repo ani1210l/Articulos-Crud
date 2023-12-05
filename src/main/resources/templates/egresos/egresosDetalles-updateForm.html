@@ -70,13 +70,13 @@
     <h3 align="center">
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Actualizar Egreso
+             alt="icon"> ACTUALIZAR ENGRESO
     </h3>
     <h4 align="center"><a th:href="@{/egresosDetalles/list}"
-                          class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">Atras</a></h4>
+                          class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">ATRAS</a></h4>
     <hr>
 
-    <p class="h4 mb-4">Actualizar Detalles</p>
+    <p class="h4 mb-4">ACTUALIZACION DE DETALLES</p>
 
 
 
@@ -88,7 +88,7 @@
         <input type="text" th:field="*{costo}" class="form-control mb-2 col-4" placeholder="Costo ">
 
         <select th:field="*{articulo.id_articulo}" class="form-control mb-2 col-4">
-            <option value="">Seleccione Articulo</option>
+            <option value="">Seleccione un Articulo:</option>
             <th:block th:each="articulo : ${allArticulos}">
                 <option th:value="${articulo.id_articulo}"
                         th:text="${articulo.nombre_articulo + ' - ' + articulo.codigoA}"></option>
@@ -103,11 +103,11 @@
             </th:block>
         </select>
 
-        <button type="submit" class="btn btn-success mb-2 col-2">Add</button>
+        <button type="submit" class="btn btn-success mb-2 col-2">GUARDAR</button>
     </form>
 
 
-    <a th:href="@{/egresosDetalles/list}" class="btn btn-warning mb-2 col-2">Back
+    <a th:href="@{/egresosDetalles/list}" class="btn btn-warning mb-2 col-2">REGRESAR
     </a>
 </div>
 

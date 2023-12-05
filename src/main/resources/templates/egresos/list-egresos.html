@@ -113,13 +113,13 @@
 
             <td><a
                     th:href="@{/articulos/showArticuloDetails(codigoA=${tempEgresos.id_egreso_cab})}"
-                    class="btn btn-success btn-sm"> Detalles </a> <a
+                    class="btn btn-success btn-sm"> DETALLES </a> <a
                     th:href="@{/articulos/showFormForUpdate(codigoA=${tempEgresos.id_egreso_cab})}"
-                    class="btn btn-info btn-sm"> Actualizar </a> <a
+                    class="btn btn-info btn-sm"> ACTUALIZACIONES </a> <a
                     th:href="@{/articulos/delete(codigoA=${tempEgresos.id_egreso_cab})}"
                     class="btn btn-danger btn-sm"
-                    onclick="if (!(confirm('Usted desea borrar Engreso?'))) return false">
-                Borrar </a></td>
+                    onclick="if (!(confirm('¿Está seguro de eliminar la sección de EGRESOS?'))) return false">
+                ELIMINAR</a></td>
 
         </tr>
         <tbody>
@@ -127,7 +127,7 @@
         </tbody>
 
     </table>
-    <a th:href="@{/egresos/list}" class="btn btn-warning btn-sm mb-3">Cargar
+    <a th:href="@{/egresos/list}" class="btn btn-warning btn-sm mb-3">CARGAR
     </a>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 

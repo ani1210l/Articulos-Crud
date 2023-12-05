@@ -54,7 +54,7 @@
             font-weight: bold;
         }
     </style>
-    <title>Detalle Egresos</title>
+    <title>DETALLES DE EGRESO</title>
 </head>
 <body>
 
@@ -65,12 +65,12 @@
     <h3 align="center">
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Egresos Detalles
+             alt="icon"> EGRESO DETALLES
     </h3>
     <h4 align="center"><a th:href="@{/egresosDetalles/list}"
-                          class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">Atras</a></h4>
+                          class="btn btn-warning btn-sm mb-3 d-inline-block align-text-top">ATRAS</a></h4>
     <hr>
-    <p class="h4 mb-4">Detalles Egresos</p>
+    <p class="h4 mb-4">DETALLES DE EGRESO</p>
 
 
     <table class="table  table-hover  table-striped">
@@ -104,7 +104,7 @@
 
         <!-- Separador y título para la sección de Detalles Bodegas -->
         <tr>
-            <th colspan="2" class="text-left text-muted" style="font-size: 14px">-----Detalles Bodega-----</th>
+            <th colspan="2" class="text-left text-muted" style="font-size: 14px">-----DETALLES DE BODEGA-----</th>
         </tr>
 
         <tr th:if="${egresosDetalles}">
@@ -121,7 +121,7 @@
         </tr>
         <!-- Separador y título para la sección de Detalles Articulos -->
         <tr>
-            <th colspan="2" class="text-left text-muted" style="font-size: 14px">-----Detalles Articulo-----</th>
+            <th colspan="2" class="text-left text-muted" style="font-size: 14px">-----DETALLES DE ARTICULO-----</th>
         </tr>
 
         <tr th:if="${egresosDetalles}">
@@ -174,14 +174,14 @@
 
     </table>
     <div align="left">
-        <a th:href="@{/egresosDetalles/list}" class="btn btn-warning btn-sm mb-3">Atras</a>
-        <a th:href="@{/egresosDetalles/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> Agregar Egreso </a>
+        <a th:href="@{/egresosDetalles/list}" class="btn btn-warning btn-sm mb-3">ATRAS</a>
+        <a th:href="@{/egresosDetalles/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> AGREGAR EGRESO </a>
         <a th:href="@{/egresosDetalles/showFormForUpdate(codigoA=${egresosDetalles.id_egreso_detalles})}"
-           class="btn btn-info btn-sm mb-3"> Actualizar </a>
+           class="btn btn-info btn-sm mb-3"> ACTUALIZAR</a>
         <a th:href="@{/egresosDetalles/delete(id_egreso_detalles=${egresosDetalles.id_egreso_detalles})}  "
            class="btn btn-danger  btn-sm mb-3"
-           onclick="if (!(confirm('Usted desea borrar Engreso Detalle?'))) return false">
-            Eliminar </a>
+           onclick="if (!(confirm('¿Está seguro de eliminar la sección de EGRESO?'))) return false">
+            ELIMINAR</a>
     </div>
 
 </div>
