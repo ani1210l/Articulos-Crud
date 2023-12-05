@@ -11,17 +11,29 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <style>
+        .thead-darkGray {
+            background-color: #4b4c4f; /* Puedes ajustar el color según tus preferencias */
+            color: white;
+        }
+
+        .body-gradient {
+            background: linear-gradient(to bottom, #ffffff, darkcyan 1800px)
+
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body, html {
             width: 100%;
+            height: 100%;
             min-height: 100%;
             overflow-x: hidden;
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -29,7 +41,7 @@
         }
 
         nav {
-            background-color: #333;
+            background-color: darkcyan;
             color: white;
             padding: 10px;
             text-align: center;
@@ -54,9 +66,9 @@
     </style>
     <title>INGRESOS</title>
 </head>
-<body>
+<body class="body-gradient">
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar navbar-expand-lg ">
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
@@ -78,11 +90,12 @@
 
 <br>
 <div class="container-fluid" align="center">
-    <h3>
-        <img th:src="@{/images/profile_200px.png}"
+    <h1 style="font-weight: bold; text-align: center; color: #545050;"><b>
+
+    <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> LISTA DE INGRESOS
-    </h3>
+             alt="icon"> LISTA DE INGRESOS </b>
+    </h1>
     <hr>
     <div class="d-flex justify-content-start align-items-center mb-3">
         <a th:href="@{/ingresos/showFormForAdd}" class="btn btn-primary btn-sm mr-2">Registrar Ingreso</a>
@@ -90,7 +103,7 @@
         <a th:href="@{/ingresoDetalles/list}" class="btn btn-primary btn-sm mr-2">Cargar</a>
     </div>
     <table class="table table-hover">
-        <thead class="thead-dark text-center">
+        <thead class="thead-darkGray text-center">
         <tr>
             <th>ID</th>
             <th>FECHA</th>

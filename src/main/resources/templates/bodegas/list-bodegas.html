@@ -110,7 +110,7 @@
     </div>
 
     <table class="table  table-hover ">
-        <thead class="thead-darkGray">
+        <thead class="thead-darkGray text-center">
         <tr>
             <th>ID</th>
             <th>CODIGO B.</th>
@@ -120,12 +120,12 @@
 
         </tr>
         </thead>
-        <tr th:each="tempBodega, i: ${bodega}">
-            <td th:text="${tempBodega.codigo_bodega}"></td>
-            <td th:text="${tempBodega.codigoB}"/>
-            <td th:text="${tempBodega.nombre}"/>
-            <td th:text="${tempBodega.ubicacion}"/>
-            <td><a
+        <tr th:each="tempBodega, i: ${bodega}" class="text-center">
+            <td th:text="${tempBodega.codigo_bodega}" class="text-center" ></td>
+            <td th:text="${tempBodega.codigoB}" class="text-center"/>
+            <td th:text="${tempBodega.nombre}" class="text-center"/>
+            <td th:text="${tempBodega.ubicacion}" class="text-center"/>
+            <td class="text-center" ><a
                     th:href="@{/bodegas/showBodegaDetails(codigo_bodega=${tempBodega.codigo_bodega})}"
                     class="btn btn-success btn-sm"> DETALLES </a> <a
                     th:href="@{/bodegas/showFormForUpdate(codigo_bodega=${tempBodega.codigo_bodega})}"

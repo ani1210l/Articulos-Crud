@@ -110,7 +110,7 @@
 
 
     <table class="table  table-hover ">
-        <thead class="thead-darkGray">
+        <thead class="thead-darkGray text-center">
         <tr>
             <th>ID</th>
             <th>CODIGO</th>
@@ -127,16 +127,16 @@
         </tr>
         </thead>
         <tr th:each="tempArticulo, i: ${articulo}">
-            <td th:text="${tempArticulo.id_articulo}"></td>
-            <td th:text="${tempArticulo.codigoA}" />
-            <td th:text="${tempArticulo.nombre_articulo}" />
-            <td th:text="${tempArticulo.clasificacion}" />
-            <td th:text="${tempArticulo.stock_actual}" />
-            <td th:text="${tempArticulo.costo_promedio}" />
-            <td th:text="${tempArticulo.bodegas.codigoB}" />
+            <td th:text="${tempArticulo.id_articulo}"  class="text-center" ></td>
+            <td th:text="${tempArticulo.codigoA}" class="text-center"/>
+            <td th:text="${tempArticulo.nombre_articulo}" class="text-center"/>
+            <td th:text="${tempArticulo.clasificacion}" class="text-center"/>
+            <td th:text="${tempArticulo.stock_actual}" class="text-center"/>
+            <td th:text="${tempArticulo.costo_promedio}" class="text-center"/>
+            <td th:text="${tempArticulo.bodegas.codigoB}" class="text-center"   />
 
 
-            <td><a
+            <td class="text-center"><a
                     th:href="@{/articulos/showArticuloDetails(codigoA=${tempArticulo.codigoA})}"
                     class="btn btn-success btn-sm"> DETALLES </a> <a
                     th:href="@{/articulos/showFormForUpdate(codigoA=${tempArticulo.codigoA})}"

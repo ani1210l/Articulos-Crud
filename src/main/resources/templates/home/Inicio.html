@@ -12,17 +12,37 @@
           crossorigin="anonymous">
     <title>Navegación</title>
     <style>
+        @keyframes slide-up {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+        .thead-darkGray {
+            background-color: #4b4c4f; /* Puedes ajustar el color según tus preferencias */
+            color: white;
+        }
+
+        .body-gradient {
+            background: linear-gradient(to bottom, #ffffff, darkcyan 1800px)
+
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
+        body, html {
             width: 100%;
+            height: 100%;
             min-height: 100%;
             overflow-x: hidden;
         }
+
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -30,7 +50,7 @@
         }
 
         nav {
-            background-color: #333;
+            background-color: darkcyan;
             color: white;
             padding: 10px;
             text-align: center;
@@ -54,10 +74,10 @@
         }
     </style>
 </head>
-<body>
+<body class="body-gradient">
 
 <section id="header">
-    <nav class="navbar navbar navbar-dark bg-dark navbar-expand-lg" style="background-color: #e3f2fd;">
+    <nav class="navbar navbar navbar-expand-lg ">
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto"> <!-- mx-auto centra los elementos -->
@@ -66,6 +86,7 @@
                 <li class="nav-item"><a class="nav-link" href="/articulos/list">Artículos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/egresosDetalles/list">Egresos</a></li>
                 <li class="nav-item"><a class="nav-link" href="/ingresoDetalles/list">Ingresos</a></li>
+
 
                 <!-- Fin de las nuevas direcciones -->
             </ul>
@@ -76,6 +97,10 @@
     </nav>
 </section>
 
+
+<div style="width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+    <img style="max-width: 50%; max-height: 50%; animation: slide-up 1s ease-out;" th:src="@{/images/logotec.png}" alt="Logo">
+</div>
 <!-- El contenido de tu página va aquí -->
 
 </body>
