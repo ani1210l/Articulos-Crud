@@ -176,7 +176,7 @@
     <div align="left">
         <a th:href="@{/egresosDetalles/list}" class="btn btn-warning btn-sm mb-3">ATRAS</a>
         <a th:href="@{/egresosDetalles/showFormForAdd}" class="btn btn-primary btn-sm mb-3"> AGREGAR EGRESO </a>
-        <a th:href="@{/egresosDetalles/showFormForUpdate(codigoA=${egresosDetalles.id_egreso_detalles})}"
+        <a th:href="@{/egresosDetalles/showFormForUpdate(id_egreso_detalles=${egresosDetalles.id_egreso_detalles})}"
            class="btn btn-info btn-sm mb-3"> ACTUALIZAR</a>
         <a th:href="@{/egresosDetalles/delete(id_egreso_detalles=${egresosDetalles.id_egreso_detalles})}  "
            class="btn btn-danger  btn-sm mb-3"

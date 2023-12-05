@@ -55,15 +55,16 @@ String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_comp
 
     ////Actualizar
     public void update(IngresoDetalles ingresoDetalles) {
-        String sql = "UPDATE ingreso_detalle SET  id_ingresos_detalle = ?, cantidad_ingresada = ?, precio_compra = ?, id_articulo = ?, id_ingresoss_cab = ? WHERE id_ingdetalle = ?";
+        String sql = "UPDATE ingreso_detalle SET  cantidad_ingresada = ?, precio_compra = ?, id_articulo = ?, id_ingresoss_cab = ? WHERE id_ingresos_detalle = ?";
         jdbcTemplate.update(
                 sql,
-                ingresoDetalles.getId_Ingresos_detalle(),
                 ingresoDetalles.getCantidad_ingresada(),
                 ingresoDetalles.getPrecio_compra(),
-                ingresoDetalles.getArticulo().getCodigoA(),
-                ingresoDetalles.getIngreso().getId_ingresocab()
-        );
+                ingresoDetalles.getArticulo().getId_articulo(),
+                ingresoDetalles.getIngreso().getId_ingresocab(),
+                ingresoDetalles.getId_Ingresos_detalle()
+
+                );
 
 
     }

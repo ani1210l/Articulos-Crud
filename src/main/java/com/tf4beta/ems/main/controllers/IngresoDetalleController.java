@@ -103,7 +103,7 @@ public class IngresoDetalleController {
     @PostMapping("/update")
     public String updateIngresoDetalles(@ModelAttribute("ingresoDetalles") IngresoDetalles ingresoDetalles) {
         ingresoDetalleService.update(ingresoDetalles);
-        return "redirect:/ingresoDetalle/list";
+        return "redirect:/ingresoDetalles/list";
 
     }
 
