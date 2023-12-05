@@ -78,11 +78,11 @@
     <h3>
         <img th:src="@{/images/profile_200px.png}"
              class="d-inline-block align-text-top" width="40" height="40"
-             alt="icon"> Ingresos Lista
+             alt="icon"> LISTA DE INGRESOS
     </h3>
     <hr>
     <div class="d-flex justify-content-between">
-        <a th:href="@{/articulos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Agregar Articulo</a>
+        <a th:href="@{/articulos/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Agregar  otro Articulo</a>
         <br>
     </div>
 
@@ -104,13 +104,13 @@
 
             <td><a
                     th:href="@{/articulos/showArticuloDetails(codigoA=${tempIngresos.id_ingresocab})}"
-                    class="btn btn-success btn-sm"> Detalles </a> <a
+                    class="btn btn-success btn-sm"> DETALLES </a> <a
                     th:href="@{/articulos/showFormForUpdate(codigoA=${tempIngresos.id_ingresocab})}"
-                    class="btn btn-info btn-sm"> Actualizar </a> <a
+                    class="btn btn-info btn-sm"> ACTUALIZACIONES </a> <a
                     th:href="@{/articulos/delete(codigoA=${tempIngresos.id_ingresocab})}"
                     class="btn btn-danger btn-sm"
-                    onclick="if (!(confirm('Are you sure you want to delete this articulo?'))) return false">
-                Borrar </a></td>
+                    onclick="if (!(confirm('¿Está seguro de eliminar la sección de INGRESOS?'))) return false">
+                ELIMINAR </a></td>
 
         </tr>
         <tbody>
@@ -118,7 +118,7 @@
         </tbody>
 
     </table>
-    <a th:href="@{/egresos/list}" class="btn btn-warning btn-sm mb-3">Cargar
+    <a th:href="@{/egresos/list}" class="btn btn-warning btn-sm mb-3">CARGAR
     </a>
     <p class="text-danger warning" th:if="${searchWarning}" th:text="${searchWarning}"></p>
 
