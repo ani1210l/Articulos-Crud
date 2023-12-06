@@ -51,16 +51,16 @@
           th:object="${articulo}" method="POST">
         <!-- Add hidden form field to handle update -->
         <input type="hidden" th:field="*{id_articulo}" class="form-control mb-2 col-4"  placeholder="ID Articulo"/>
-        <input type="text" th:field="*{codigoA}" class="form-control mb-2 col-4"  placeholder="Codigo Articulo"/>
-        <input type="text" th:field="*{nombre_articulo}" class="form-control mb-2 col-4"  placeholder="Nombre Articulo">
-        <input type="text" th:field="*{stock_actual}" class="form-control mb-2 col-4"  placeholder="Stock Actual">
-        <input type="text" th:field="*{stock_minimo}" class="form-control mb-2 col-4" placeholder="Stock Minimo">
-        <input type="text" th:field="*{stock_maximo}" class="form-control mb-2 col-4"  placeholder="Stock Maximo">
-        <input type="text" th:field="*{clasificacion}" class="form-control mb-2 col-4"  placeholder="Clasificacion">
-        <input type="text" th:field="*{costo_promedio}" class="form-control mb-2 col-4"  placeholder="Costo Promedio">
+        <input type="text" th:field="*{codigoA}" class="form-control mb-2 col-4"  placeholder="Codigo Articulo"  required/>
+        <input type="text" th:field="*{nombre_articulo}" class="form-control mb-2 col-4"  placeholder="Nombre Articulo" required>
+        <input type="text" th:field="*{stock_actual}" class="form-control mb-2 col-4"  placeholder="Stock Actual" required pattern="\d+" title="Por favor, ingrese solo números positivos en el código" >
+        <input type="text" th:field="*{stock_minimo}" class="form-control mb-2 col-4" placeholder="Stock Minimo"  required pattern="\d+" title="Por favor, ingrese solo números positivos en el código">
+        <input type="text" th:field="*{stock_maximo}" class="form-control mb-2 col-4"  placeholder="Stock Maximo" required pattern="\d+" title="Por favor, ingrese solo números positivos en el código">
+        <input type="text" th:field="*{clasificacion}" class="form-control mb-2 col-4"  placeholder="Clasificacion" required>
+        <input type="text" th:field="*{costo_promedio}" class="form-control mb-2 col-4"  placeholder="Costo Promedio" required pattern="\d+" title="Por favor, ingrese solo números positivos en el código">
         <div class="form-group">
             <label >Seleccionar la Bodega:</label>
-            <select th:field="*{bodegas.codigo_bodega}" class="form-control">
+            <select th:field="*{bodegas.codigo_bodega}" class="form-control" required>
                 <option th:each="bodega : ${allBodegas}" th:value="${bodega.codigo_bodega}" th:text="${bodega.nombre}"></option>
             </select>
         </div>

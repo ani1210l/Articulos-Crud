@@ -51,9 +51,9 @@
     <form action="#" th:action="@{/bodegas/save}"
           th:object="${bodega}" method="POST">
         <!-- Add hidden form field to handle update -->
-        <input type="text" th:field="*{codigoB}" class="form-control mb-2 col-4"  placeholder="Codigo Bodega">
-        <input type="text" th:field="*{nombre}" class="form-control mb-2 col-4"  placeholder="Nombre Bodega">
-        <input type="text" th:field="*{ubicacion}" class="form-control mb-2 col-4" placeholder="Ubicacion">
+        <input type="text" th:field="*{codigoB}" class="form-control mb-2 col-4"  placeholder="Codigo Bodega" required>
+        <input type="text" th:field="*{nombre}" class="form-control mb-2 col-4"  placeholder="Nombre Bodega" required>
+        <input type="text" th:field="*{ubicacion}" class="form-control mb-2 col-4" placeholder="Ubicacion" required>
 
 
 

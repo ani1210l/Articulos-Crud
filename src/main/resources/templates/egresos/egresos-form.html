@@ -85,9 +85,9 @@
             <!-- Add hidden form field to handle update -->
             <div class="form-group">
                 <input type="date"  th:field="*{fecha}" name="joiningdate" placeholder="dd-mm-yyyy" value="" min="1997-01-01"
-                       max="2030-12-31"0  >
+                       max="2030-12-31" required >
             </div>
-            <select th:field="*{bodega.codigo_bodega}" id="selectedBodega" class="form-control mb-2 col-4">
+            <select th:field="*{bodega.codigo_bodega}" id="selectedBodega" class="form-control mb-2 col-4" required>
                 <option value="">Seleccione Bodega</option>
                 <th:block th:each="bodega : ${allBodegas}">
                     <option th:value="${bodega.codigo_bodega}" th:text="${bodega.codigoB + ' - ' + bodega.nombre}"></option>
