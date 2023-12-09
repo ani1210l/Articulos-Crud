@@ -21,19 +21,19 @@ public class IngresoDetallesDao {
     public void save(IngresoDetalles ingresoDetalles) {
         String sqlStock = "SELECT stock_actual FROM articulo WHERE id_articulo = ?";
         int stockActual = jdbcTemplate.queryForObject(sqlStock, Integer.class, ingresoDetalles.getArticulo().getId_articulo());
-int nuevacantidad = stockActual + ingresoDetalles.getCantidad_ingresada();
+        int nuevacantidad = stockActual + ingresoDetalles.getCantidad_ingresada();
 
-String sqlUpdateStock ="UPDATE articulo SET stock_actual = ? WHERE id_articulo = ?";
-jdbcTemplate.update(sqlUpdateStock, nuevacantidad, ingresoDetalles.getArticulo().getId_articulo());
+        String sqlUpdateStock = "UPDATE articulo SET stock_actual = ? WHERE id_articulo = ?";
+        jdbcTemplate.update(sqlUpdateStock, nuevacantidad, ingresoDetalles.getArticulo().getId_articulo());
 
-String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_compra,id_ingresoss_cab,id_articulo)VALUES (?,?,?,?)";
-    jdbcTemplate.update(
-            sqlInsertar,
-            ingresoDetalles.getCantidad_ingresada(),
-            ingresoDetalles.getPrecio_compra(),
-            ingresoDetalles.getIngreso().getId_ingresocab(),
-            ingresoDetalles.getArticulo().getId_articulo()
-    );
+        String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_compra,id_ingresoss_cab,id_articulo)VALUES (?,?,?,?)";
+        jdbcTemplate.update(
+                sqlInsertar,
+                ingresoDetalles.getCantidad_ingresada(),
+                ingresoDetalles.getPrecio_compra(),
+                ingresoDetalles.getIngreso().getId_ingresocab(),
+                ingresoDetalles.getArticulo().getId_articulo()
+        );
 
     }
     ////Borrar por id
@@ -52,7 +52,6 @@ String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_comp
     }
 
 
-
     ////Actualizar
     public void update(IngresoDetalles ingresoDetalles) {
         String sql = "UPDATE ingreso_detalle SET  cantidad_ingresada = ?, precio_compra = ?, id_articulo = ?, id_ingresoss_cab = ? WHERE id_ingresos_detalle = ?";
@@ -64,8 +63,7 @@ String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_comp
                 ingresoDetalles.getIngreso().getId_ingresocab(),
                 ingresoDetalles.getId_Ingresos_detalle()
 
-                );
-
+        );
 
     }
 
@@ -73,8 +71,9 @@ String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_comp
         String sql = "SELECT * FROM ingreso_detalle WHERE id_ingresos_detalle = ?";
         return jdbcTemplate.queryForObject(sql, new IngresoDetalleRowMapper(), id_ingresos_detalle);
     }
-    public IngresoDetalles findByIdWithAllDetails(int id_ingresos_detalle){
-        String sql ="SELECT `ingreso_detalle`.*, `ingresos_cab`.*, `articulo`.*, `bodega`.* " +
+
+    public IngresoDetalles findByIdWithAllDetails(int id_ingresos_detalle) {
+        String sql = "SELECT `ingreso_detalle`.*, `ingresos_cab`.*, `articulo`.*, `bodega`.* " +
                 "FROM `ingreso_detalle` " +
                 "LEFT JOIN `ingresos_cab` ON `ingreso_detalle`.`id_ingresoss_cab` = `ingresos_cab`.`id_ingreso_cab` " +
                 "LEFT JOIN `articulo` ON `ingreso_detalle`.`id_articulo` = `articulo`.`id_articulo`" +
@@ -94,7 +93,7 @@ String sqlInsertar = "INSERT INTO ingreso_detalle(cantidad_ingresada,precio_comp
                 "\tLEFT JOIN `ingresos_cab` ON `ingreso_detalle`.`id_ingresoss_cab` = `ingresos_cab`.`id_ingreso_cab` \n" +
                 "\tLEFT JOIN `articulo` ON `ingreso_detalle`.`id_articulo` = `articulo`.`id_articulo`\n" +
                 "\t LEFT JOIN `bodega` ON `articulo`.`codigo_bodega` = `bodega`.`codigo_bodega`";
-         return jdbcTemplate.query(sql, new IngresoDetalleRowMapper());
+        return jdbcTemplate.query(sql, new IngresoDetalleRowMapper());
     }
 
 
