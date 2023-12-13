@@ -83,10 +83,10 @@
     <form action="#" th:action="@{/egresosDetalles/save}"
           th:object="${egresosDetalles}" method="POST">
         <!-- Add hidden form field to handle update -->
-        <input type="text" th:field="*{cantidad}" class="form-control mb-2 col-4" placeholder="Cantidad "/>
-        <input type="text" th:field="*{costo}" class="form-control mb-2 col-4" placeholder="Costo ">
+        <input type="text" th:field="*{cantidad}" class="form-control mb-2 col-4" placeholder="Cantidad" required pattern="\d+" title="Por favor, ingrese solo números positivos en el código" />
+        <input type="text" th:field="*{costo}" class="form-control mb-2 col-4" placeholder="Costo" required pattern="\d+" title="Por favor, ingrese solo números positivos en el código" >
 
-        <select th:field="*{articulo.id_articulo}" class="form-control mb-2 col-4">
+        <select th:field="*{articulo.id_articulo}" class="form-control mb-2 col-4" required>
             <option value="">Seleccione Articulo</option>
             <th:block th:each="articulo : ${allArticulos}">
                 <option th:value="${articulo.id_articulo}"
@@ -94,7 +94,7 @@
             </th:block>
         </select>
         <br>
-        <select th:field="*{egreso.id_egreso_cab}" class="form-control mb-2 col-4">
+        <select th:field="*{egreso.id_egreso_cab}" class="form-control mb-2 col-4"  required>
             <option value="">Seleccione la Bodega de Egreso:</option>
             <th:block th:each="egresos : ${allEgresos}">
                 <option th:value="${egresos.id_egreso_cab}"

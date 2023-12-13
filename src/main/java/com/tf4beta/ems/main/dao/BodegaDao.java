@@ -3,7 +3,6 @@ package com.tf4beta.ems.main.dao;
 import com.tf4beta.ems.main.entity.Bodega;
 
 import com.tf4beta.ems.main.rowmapper.BodegaRowMapper;
-import com.tf4beta.ems.main.rowmapper.EmployeeRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
