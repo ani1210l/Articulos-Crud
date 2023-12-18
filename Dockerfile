@@ -1,4 +1,6 @@
-FROM ubuntu:latest
-LABEL authors="carli"
+FROM openjdk:17-jdk-alpine
+MAINTAINER 4softwaredevelopers.com
+RUN addgroup -5 spring && adduser - spring -G spring
+USER spring:spring
 
-ENTRYPOINT ["top", "-b"]
+ARG JAR_FILE=target/*.jar

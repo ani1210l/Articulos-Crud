@@ -12,7 +12,7 @@
 	<groupId>com.tf4.ems.main</groupId>
 	<artifactId>spring-boot-ems-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>EMS-CRUD</name>
 	<description>Spring Boot EMS Application</description>
 	<properties>
